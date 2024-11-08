@@ -29,4 +29,15 @@ npm install
 cd ../client
 npm install
 
+### Step 3: Run the Application
+Use the following commands to start both the server and client in development mode.
+
+```bash
+# Start the server
+cd server
+npm run dev
+
+# Start the client
+cd ../client
+npm run dev
 
