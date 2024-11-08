@@ -2,7 +2,8 @@ import dotenv from "dotenv";
 import express from "express";
 import { connectDb } from "./db/index.js";
 import cookieParser from "cookie-parser"
-import authRoutes from "./routes/auth.routes.js";
+import authRoutes from "./routes/authRoutes.js";
+import searchRoutes from "./routes/searchRoutes.js";
 const app = express();
 dotenv.config();
 app.use(express.json());
@@ -18,3 +19,4 @@ connectDb().then(()=>{
 })
 
 app.use('/api',authRoutes)
+app.use('/api',searchRoutes)
