@@ -3,49 +3,59 @@ import axios from 'axios';
 
 const SearchComponent = () => {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
+  // Handle search
   const handleSearch = async () => {
+    setLoading(true);
+    setError('');
     try {
       const response = await axios.get(`/api/search`, { params: { query } });
-      console.log('Search results:', response);
-      setResults(response.data.data);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
+      setProducts(response.data.data);
+    } catch (err) {
+      setError('Failed to fetch products. Please try again.');
     }
+    setLoading(false);
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <input
-        type="text"
-        className="border rounded p-2 w-full mb-4"
-        placeholder="Enter search query"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button
-        onClick={handleSearch}
-        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6"
-      >
-        Search
-      </button>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Product Search</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {results.map((data) => (
-          <div
-            key={data.cacheId}
-            className="border rounded-lg shadow-lg p-6 bg-white hover:bg-gray-100 transition duration-200 ease-in-out"
-          >
-            <a
-              href={data.link}
-              className="text-blue-800 font-bold text-lg hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {data.title}
+      {/* Search Input */}
+      <div className="flex items-center mb-4">
+        <input
+          type="text"
+          className="border rounded p-2 w-full"
+          placeholder="Enter product query"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button
+          onClick={handleSearch}
+          className="bg-blue-500 text-white px-4 py-2 ml-2 rounded"
+        >
+          Search
+        </button>
+      </div>
+
+      {/* Error Message */}
+      {error && <p className="text-red-500">{error}</p>}
+
+      {/* Loading Indicator */}
+      {loading && <p>Loading...</p>}
+
+      {/* Product Results */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {products.map((product) => (
+          <div key={product._id} className="border p-4 rounded shadow-md">
+            <a href={product.link} target="_blank" rel="noopener noreferrer" className="font-bold text-blue-700">
+              {product.title}
             </a>
-            <p className="text-gray-700 mt-2">{data.snippet}</p>
+            <p className="text-gray-600">{product.price}</p>
+            <p className="text-gray-500">{product.description}</p>
           </div>
         ))}
       </div>
