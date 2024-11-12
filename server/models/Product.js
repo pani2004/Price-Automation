@@ -1,4 +1,3 @@
-// models/Product.js
 import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
@@ -8,15 +7,15 @@ const productSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required: true,
+    // required: true,
   },
   price: {
     type: String,
-    required: false, // Some sites may not have a price available
+    required: false, 
   },
   link: {
     type: String,
-    required: true,
+    // required: true,
   },
   description: {
     type: String,

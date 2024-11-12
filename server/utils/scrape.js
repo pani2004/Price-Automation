@@ -1,59 +1,36 @@
-import { chromium } from 'playwright';  // Import Playwright's chromium browser module
-import scraperConfig from './scraperConfig.json' assert { type: 'json' };  // Scraper config file
+import { chromium } from 'playwright'; 
+import scraperConfig from './scraperConfig.json' assert { type: 'json' };
 
 export const scrape = async (query) => {
     const websites = Object.keys(scraperConfig);
     const results = [];
-
     console.log(`Starting scrape for query: "${query}"`);
-
     for (const website of websites) {
         try {
-            console.log(`Starting scrape for website: ${website}`);
-
+            console.log(`\nStarting scrape for website: ${website}`);
             const config = scraperConfig[website];
             const url = config.url.replace('{query}', encodeURIComponent(query));
-
             console.log(`Navigating to URL: ${url}`);
-
-            // Launching the browser and setting up page
             const browser = await chromium.launch({ headless: true });
             const page = await browser.newPage();
-
+            // Navigate to the URL and wait for the page to load
             await page.goto(url, { waitUntil: 'load', timeout: 120000 });
-
-            // If scraping Flipkart, log and check product elements
-            if (website === 'flipkart') {
-                console.log("Page loaded. Checking available selectors...");
-
-                // Logging all found product elements
-                const productElements = await page.$$eval('.DOjaWF.gdgoEp', elements => elements.map(el => el.className));
-                console.log('Found product elements:', productElements);
-            }
-
             console.log(`Waiting for selector: ${config.selectors.product}`);
             await page.waitForSelector(config.selectors.product, { state: 'visible' });
-
-            // Extracting product data using evaluate
+            // Extract product data from the page using the provided selectors
             const products = await page.evaluate((config) => {
                 const items = [];
-
-                // Select all product elements matching the configured class
                 const productElements = document.querySelectorAll(config.selectors.product);
-                console.log(`Found ${productElements.length} product elements`);
-
-                productElements.forEach((item) => {
+                console.log(`Found ${productElements.length} product elements on ${config.website}`);
+                productElements.forEach((item, index) => {
+                    // Extracting product data using configured selectors
                     const title = item.querySelector(config.selectors.title)?.textContent.trim();
                     const price = item.querySelector(config.selectors.price)?.textContent.trim();
                     const link = item.querySelector(config.selectors.link)?.href;
-
-                    // Log the extracted data
-                    console.log('Extracted data:');
-                    console.log('Title:', title);
-                    console.log('Price:', price);
-                    console.log('Link:', link);
-
-                    // Only push items if data is valid
+                    console.log(`Product ${index + 1}:`);
+                    console.log(`Title: ${title}`);
+                    console.log(`Price: ${price}`);
+                    console.log(`Link: ${link}`);
                     if (title && price && link) {
                         items.push({
                             title,
@@ -69,20 +46,21 @@ export const scrape = async (query) => {
             }, config);
 
             console.log(`Scraped ${products.length} products from ${website}`);
-
             if (products.length > 0) {
                 results.push({ website, products });
             } else {
                 console.log(`No products found for ${website}`);
             }
-
             await browser.close();
         } catch (error) {
             console.error(`Failed to scrape ${website}:`, error.message);
         }
     }
-
-    console.log('Scraping complete. Returning results.');
-
+    console.log('\nScraping complete. Returning results.');
+    if (results.length === 0) {
+        console.log('No products were scraped from any website');
+    } else {
+        console.log('Scraped Results:', JSON.stringify(results, null, 2));
+    }
     return results;
 };
