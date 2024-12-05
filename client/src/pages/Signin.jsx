@@ -28,7 +28,7 @@ function Signin() {
       const data = res.data;
       console.log(data);
       dispatch(signInSuccess(data));
-      navigate('/');
+      navigate('/search');
     } catch (error) {
       if (error.response && error.response.status === 404) {
         dispatch(signInFailure('User not found'));
