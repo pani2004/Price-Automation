@@ -1,25 +1,4 @@
 {
-  "reliance_digital": {
-    "url": "https://www.reliancedigital.in/search?q={query}",
-    "selectors": {
-      "product": "div.pl__container",
-      "title": ".sp__name",
-      "price": "span.TextWeb__Text-sc-1cyx778-0.gimCrs",
-      "link": "a"
-    },
-    "website": "reliance digital"
-  },
-  
-  "croma": {
-    "url": "https://www.croma.com/searchB?q={query}%3Arelevance&text={query}",
-    "selectors": {
-      "product": ".product-list",
-      "title": ".product-title.plp-prod-title",
-      "price": ".amount.plp-srp-new-amount",
-      "link": "a"
-    },
-    "website": "croma"
-  },
   
   "indiamart": {
     "url": "https://dir.indiamart.com/search.mp?ss={query}&v=4&mcatid=&catid=&no_sugg=true&tags=qr_nm:gd|cs:6883|res:RC4|com-cf:nl|ptrs:na|ktp:N0|mc:2300|cat:799|mtp:G|qry_typ:P|lang:en|wc:1",
