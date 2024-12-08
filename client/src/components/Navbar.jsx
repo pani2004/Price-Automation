@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import React, { useState, useRef, useEffect } from 'react';
-=======
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
->>>>>>> cddf838e00b671d0b22299979d984f549f23997d
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,14 +20,10 @@ const Navbar = () => {
   }, []);
 
   return (
-<<<<<<< HEAD
     <nav
       ref={navRef}
       className="w-[85%] sm:w-full max-w-[769px] h-[50px] sm:h-[71.16px] bg-black px-4 py-2 mx-auto flex items-center justify-between rounded-[40px] mt-4 sm:px-[32.11px] sm:py-[24.08px] sm:rounded-[81px] sm:mt-8 z-10"
     >
-=======
-    <nav className="w-full max-w-[769px] h-[71.16px] bg-black px-[32.11px] py-[24.08px] flex items-center justify-between mx-auto rounded-[81px] mt-5 z-10">
->>>>>>> cddf838e00b671d0b22299979d984f549f23997d
       <div className="text-white text-[19.27px] font-inter">Market Scout</div>
       <div className="lg:hidden flex items-center">
         <button
@@ -52,7 +44,6 @@ const Navbar = () => {
           </svg>
         </button>
       </div>
-<<<<<<< HEAD
       <div
         className={`flex flex-col lg:flex-row lg:space-x-8 ${
           isOpen
@@ -60,19 +51,14 @@ const Navbar = () => {
             : 'hidden lg:flex'
         }`}
       >
-        <a
-          href="#home"
-=======
-      <div className={`flex-col lg:flex-row lg:flex lg:space-x-8 ${isOpen ? 'absolute top-[71.16px] left-0 w-full bg-black px-6 py-8 items-center justify-center z-20' : 'hidden lg:flex'}`}>
         <Link
           to="/"
->>>>>>> cddf838e00b671d0b22299979d984f549f23997d
           className="text-[#FF8C00] text-[19.27px] font-inter hover:underline hover:text-white transition duration-200"
         >
           Home
         </Link>
         <Link
-          to="#about"
+          to="/about"
           className="text-white text-[19.27px] font-inter hover:underline hover:text-[#FF8C00] transition duration-200"
         >
           About
@@ -89,6 +75,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
 
