@@ -72,19 +72,17 @@ PORT=5000
    - Comprehensive tools for analyzing market trends and fluctuations. 
 
 ### **Technical Features**
-4. **High-Throughput Management**  
-   - **Kafka** ensures scalable and fault-tolerant data streaming.  
-5. **Caching for Speed**  
+4. **Caching for Speed**  
    - **Redis** reduces query response time by caching frequently accessed data.  
-6. **Load Balancing**  
+5. **Load Balancing**  
    - **Nginx** balances requests across backend servers.  
 
 ### **User-Focused Features**
-7. **User-Friendly Interface**  
+6. **User-Friendly Interface**  
    - Built with **ReactJS** and **TailwindCSS** for an intuitive design.  
-8. **Scalability**  
+7. **Scalability**  
    - Handles increasing data and user demands efficiently.  
-9. **Historical Data Access**  
+8. **Historical Data Access**  
    - Provides historical price trends for informed decisions.  
 
 ---
@@ -94,7 +92,7 @@ PORT=5000
 - **Frontend**: ReactJS, TailwindCSS  
 - **Backend**: Node.js, Express  
 - **Database**: MongoDB  
-- **Additional Tools**: Kafka, Redis, Nginx  
+- **Additional Tools**: Redis, Nginx 
 
 ---
 
