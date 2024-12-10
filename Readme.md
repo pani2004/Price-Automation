@@ -2,11 +2,15 @@
 
 A web application that fetches and displays product details and prices from various shopping sites. This project is divided into two main parts: the client and the server.
 
+---
+
 ## Prerequisites
 
 Ensure you have the following installed on your machine:
 - Node.js and npm
 - MongoDB
+
+---
 
 ## Project Structure
 
@@ -36,9 +40,7 @@ npm install
 # Install client dependencies
 cd ../client
 npm install
-
-### Step 3: Run the Application
-Use the following commands to start both the server and client in development mode.
+```
 
 ```bash
 # Start the server
@@ -48,6 +50,15 @@ npm run dev
 # Start the client
 cd ../client
 npm run dev
+```
+
+```bash
+#sample .env file
+MONGO_URL =
+DB_NAME = ""
+JWT_SECRET=""
+PORT=5000
+```
 
 
 ## **Key Features**
