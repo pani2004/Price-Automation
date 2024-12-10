@@ -25,7 +25,7 @@ function SearchPage() {
           style={{
             width: '514px',
             height: '91px',
-            backgroundColor: 'rgba(255, 140, 0, 0.16)', // Updated with 16% opacity
+            backgroundColor: 'rgba(255, 140, 0, 0.16)', 
             borderRadius: '8px',
           }}
         >

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signin from './pages/Signin';
@@ -20,6 +19,7 @@ function App() {
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/' element={<HomePage/>}/>
+        <Route path='/search1' element={<SearchComponent/>}/>
         {/* Protected route for SearchComponent */}
         <Route element={<PrivateRoute />}>
           <Route path='/search' element={<SearchPage />} />

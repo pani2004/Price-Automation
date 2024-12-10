@@ -1,19 +1,17 @@
 import { chromium } from 'playwright';
-import stationaryScraperConfig from '../scraperConfig/stationaryScraperConfig.json' assert { type: 'json' };
-import furnitureScraperConfig from '../scraperConfig/furnitureScraperConfig.json' assert { type: 'json' };
-import vehicleScraperConfig from '../scraperConfig/vehicleScraperConfig.json' assert { type: 'json' };
-import networkDevicesScraperConfig from '../scraperConfig/networkDevicesScraperConfig.json' assert { type: 'json' };
+import hardwareScraperConfig from '../utils/hardwareScraperConfig.json' assert { type: 'json' };
 
-const scrapeCategory = async (query, config, category) => {
+const scrapeCategory = async (query, config, category, make, model) => {
   const websites = Object.keys(config);
   const results = [];
   const browser = await chromium.launch({ headless: false });
 
-  console.log(`Starting scrape for category: "${category}" and query: "${query}"`);
+  console.log(`Starting scrape for category: "${category}", query: "${query}", make: "${make}", model: "${model}"`);
 
   for (const website of websites) {
     const websiteConfig = config[website];
-    const url = websiteConfig.url.replace(/{query}/g, encodeURIComponent(query));
+    const searchQuery = encodeURIComponent(`${query} ${make} ${model}`);
+    const url = websiteConfig.url.replace(/{query}/g, searchQuery);
     console.log(`Scraping ${website} at ${url}`);
 
     try {
@@ -21,21 +19,10 @@ const scrapeCategory = async (query, config, category) => {
         extraHTTPHeaders: websiteConfig.headers || {}, 
       });
       const page = await context.newPage();
-      await context.grantPermissions(['geolocation'], { origin: url });
-      console.log('Geolocation permission granted.');
-
       await page.goto(url, { waitUntil: 'load', timeout: 120000 });
-      if (websiteConfig.selectors.dismissPopup) {
-        try {
-          await page.waitForSelector(websiteConfig.selectors.dismissPopup, { timeout: 5000 });
-          await page.click(websiteConfig.selectors.dismissPopup);
-          console.log('Location permission popup closed.');
-        } catch (err) {
-          console.log('No location popup detected or could not close it.');
-        }
-      }
+
       await page.waitForSelector(websiteConfig.selectors.product, { state: 'visible', timeout: 30000 });
-      const product = await page.evaluate((websiteConfig) => {
+      const product = await page.evaluate(({ websiteConfig, make, model }) => {
         const productElement = document.querySelector(websiteConfig.selectors.product);
         if (productElement) {
           const title = productElement.querySelector(websiteConfig.selectors.title)?.textContent.trim();
@@ -48,11 +35,13 @@ const scrapeCategory = async (query, config, category) => {
               title,
               price,
               link: link.startsWith('http') ? link : `https://${websiteConfig.website}.com${link}`,
+              make,
+              model,
             };
           }
         }
         return null;
-      }, websiteConfig);
+      }, { websiteConfig, make, model });
 
       if (product) {
         results.push({ website, products: [product] });
@@ -70,7 +59,9 @@ const scrapeCategory = async (query, config, category) => {
   return results;
 };
 
-export const scrapeStationary = (query) => scrapeCategory(query, stationaryScraperConfig, 'Stationary');
-export const scrapeFurniture = (query) => scrapeCategory(query, furnitureScraperConfig, 'Furniture');
-export const scrapeVehicle = (query) => scrapeCategory(query, vehicleScraperConfig, 'Vehicle');
-export const scrapeNetworkDevices = (query) => scrapeCategory(query, networkDevicesScraperConfig, 'Network Devices');
+
+
+export const scrapeHardware = (query, make, model) =>
+scrapeCategory(query, hardwareScraperConfig, 'Hardware', make, model);
+
+

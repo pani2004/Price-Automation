@@ -59,7 +59,7 @@ function Signin() {
                 <input
                   type="text"
                   id="email"
-                  placeholder="Username"
+                  placeholder="email"
                   className="rounded-lg p-4 focus:outline-none "
                   style={{
                     width: '572.98px',

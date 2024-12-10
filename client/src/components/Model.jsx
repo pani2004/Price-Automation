@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Footer from './Footer';
 
 function ModelPage() {
@@ -6,11 +7,28 @@ function ModelPage() {
   const [make, setMake] = useState('');
   const [category, setCategory] = useState('');
   const [model, setModel] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log({ itemName, make, category, model });
+    setMessage(''); // Clear any previous messages
+
+    // Log the selected category to check if it's correct
+    console.log('Selected Category:', category);
+
+    try {
+      const response = await axios.post('/api/search', {
+        query: itemName,
+        make,
+        category,
+        model,
+      });
+      setMessage('Product details submitted successfully!');
+      console.log('Response:', response.data);
+    } catch (error) {
+      setMessage('Error submitting product details.');
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -50,13 +68,11 @@ function ModelPage() {
               onChange={(e) => setCategory(e.target.value)}
               className="w-full h-[74px] bg-[#FF8C00] opacity-[0.8] text-black px-4 rounded-[8.3px]"
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Select Category
               </option>
-              <option value="network_devices">Network Devices</option>
-              <option value="stationary">Stationary</option>
-              <option value="furniture">Furniture</option>
               <option value="vehicle">Vehicle</option>
+              <option value="it_hardware">It Hardware</option>
             </select>
           </div>
           <div className="flex flex-col w-[473px]">
@@ -77,13 +93,18 @@ function ModelPage() {
             Submit
           </button>
         </div>
+        {message && (
+          <p className="text-center text-black font-medium mt-4">{message}</p>
+        )}
       </form>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
 
 export default ModelPage;
+
+
 
 
 

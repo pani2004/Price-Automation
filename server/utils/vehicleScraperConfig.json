@@ -1,0 +1,32 @@
+{
+    "cardekho": {
+    "url": "https://www.cardekho.com/searchresult?q={query}",
+    "selectors": {
+        "product": ".contentHold gsc_row  ",
+        "title": ".slink  title",
+        "price": ".price",
+        "link": ".slink title a"
+    },
+    "website": "cardekho"
+},
+"cars24": {
+    "url": "https://www.cars24.com/buy-used-{query}-cars-new-delhi/?sort=bestmatch&serveWarrantyCount=true&search={query}&listingSource=Search_HP&storeCityId=2",
+    "selectors": {
+        "product": "._5Qs6v",
+        "title": "._2Out2",
+        "price": "._37WXy",
+        "link": "._1_1Uy"
+    },
+    "website": "cars24"
+},
+"spinny": {
+    "url": "https://www.spinny.com/used-{query}-cars-in-kolkata/s/",
+    "selectors": {
+        "product": ".CarListingDesktop__carListingDesktopWrapper",
+        "title": ".styles__yearAndMakeAndModelSection",
+        "price": ".styles__slashedPrice",
+        "link": ".styles__carDetailSection"
+    },
+    "website": "spinny"
+}
+}

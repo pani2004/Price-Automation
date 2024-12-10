@@ -1,55 +1,12 @@
 {
-  
-  "indiamart": {
-    "url": "https://dir.indiamart.com/search.mp?ss={query}&v=4&mcatid=&catid=&no_sugg=true&tags=qr_nm:gd|cs:6883|res:RC4|com-cf:nl|ptrs:na|ktp:N0|mc:2300|cat:799|mtp:G|qry_typ:P|lang:en|wc:1",
-    "selectors": {
-      "product": ".listingCardContainer",
-      "title": ".producttitle",
-      "price": ".price",
-      "link": "a"
-    },
-    "website": "indiamart"
-  },
-  
-  "robomart": {
-    "url": "https://robomart.com/index.php?route=product/search&search={query}",
-    "selectors": {
-      "product": ".main-products-wrapper",
-      "title": ".name",
-      "price": ".price-normal",
-      "link": ".name a"
-    },
-    "website": "robomart"
-  },
-  
-  "networkdevices": {
-    "url": "https://networkdevicesinc.com/apps/omega-search/?type=product&q={query}",
-    "selectors": {
-      "product": ".os-content",
-      "title": "a.os-e.os-name",
-      "price": "div.os-e.os-price",
-      "link": "a.os-e.os-name"
-    },
-    "website": "networkdevices"
-  },
-  
-  "serverbasket": {
-    "url": "https://www.serverbasket.com/?s={query}&post_type=product",
-    "selectors": {
-      "product": ".mf-shop-content",
-      "title": "h2.woo-loop-product__title",
-      "price": ".woocommerce-Price-amount.amount",
-      "link": "h2.woo-loop-product__title a"
-    },
-    "website": "serverbasket"
-  },
-  
-  "cdw": {
-    "url": "https://www.cdw.com/search/{category}/?w={query}&key=switch&akr=0&fta=1",
-    "selectors": {
-      "product": ".search-results",
-      "title": ".product-specs h2 a",
-      "price": ".price-type-price"
-    }
-  }
+    "croma": {
+        "url": "https://www.croma.com/searchB?q={query}%3Arelevance&text={query}",
+        "selectors": {
+          "product": ".product-list",
+          "title": "h3.product-title.plp-prod-title a",
+          "price": "span.amount.plp-srp-new-amount",
+          "link": "a"
+        },
+        "website": "croma"
+      }
 }
