@@ -13,11 +13,10 @@ function ServicePage() {
       alert('Please select a service type.');
       return;
     }
-
     try {
       const response = await axios.get(`/api/services/${serviceType}`);
       console.log('Fetched Data:', response.data);
-      navigate('/serviceresult', { state: { data: response.data } });
+      navigate('/serviceresult', { state: { data: response.data, serviceType } });
     } catch (error) {
       console.error('Error fetching data:', error);
       alert('Failed to fetch data. Please try again.');
@@ -34,8 +33,9 @@ function ServicePage() {
       </h1>
 
       <form className="space-y-6" onSubmit={handleSubmit}>
-        <div className="flex flex-col w-[473px] mt-10">
-          <p className="text-white font-medium mb-2 text-2xl">Service Type</p>
+        {/* Service Type Dropdown */}
+        <div className="flex flex-col w-[473px]">
+          <p className="text-black font-medium mb-2">Service Type</p>
           <select
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
@@ -45,21 +45,14 @@ function ServicePage() {
               Select Service Type
             </option>
             <option value="security">Security</option>
-            <option value="cleaning">Sanitation</option>
-            <option value="cleaning">Cleaning</option>
+            <option value="vehicle">Vehicle</option>
             <option value="cloudservice">Cloud Services</option>
             <option value="consultingservices">Consulting Services</option>
           </select>
         </div>
-        <div className="flex flex-col w-[473px]">
-          <p className="text-white font-medium mb-2 text-2xl">Description</p>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full h-[74px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px]"
-          />
-        </div>
+
+       
+        {/* Submit Button */}
         <div className="flex justify-center">
           <button
             type="submit"
@@ -74,3 +67,4 @@ function ServicePage() {
 }
 
 export default ServicePage;
+

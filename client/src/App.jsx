@@ -12,6 +12,7 @@ import ServicePage from './components/Service';
 import SpecificationPage from './components/Specification';
 import ServiceResult from './pages/ServiceResult';
 import AboutUs from "./pages/AboutUs";
+import Profile from "./pages/Profile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -24,7 +25,6 @@ function App() {
         <Route path='/' element={<HomePage/>}/>
         <Route path='/search1' element={<SearchComponent/>}/>
         <Route path='/about' element={<AboutUs/>}/>
-        
         {/* Protected route for SearchComponent */}
         <Route element={<PrivateRoute />}>
           <Route path='/search' element={<SearchPage />} />
@@ -32,6 +32,7 @@ function App() {
           <Route path='/service' element={<ServicePage/>}/>
           <Route path='/specification' element={<SpecificationPage/>}/>
           <Route path='/serviceresult' element={<ServiceResult/>}/>
+          <Route path='/profile' element={<Profile/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
