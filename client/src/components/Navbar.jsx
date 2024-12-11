@@ -24,7 +24,7 @@ const Navbar = () => {
     <nav
       ref={navRef}
       className="w-[85%] sm:w-full max-w-[769px] h-[50px] sm:h-[71.16px] bg-white px-4 py-2 mx-auto flex items-center justify-between rounded-[40px] mt-4 sm:px-[32.11px] sm:py-[24.08px] sm:rounded-[81px] sm:mt-8 z-10"
-      className="w-[85%] sm:w-full max-w-[769px] h-[50px] sm:h-[71.16px] bg-white px-4 py-2 mx-auto flex items-center justify-between rounded-[40px] mt-4 sm:px-[32.11px] sm:py-[24.08px] sm:rounded-[81px] sm:mt-8 z-10"
+    
     >
       <Link className="text-black text-[19.27px] font-inter" to="/">Market Scout</Link>
       {/* Hamburger Menu for Mobile */}
@@ -55,20 +55,19 @@ const Navbar = () => {
         <Link
           to="/"
           className="text-[#6969CC] text-[19.27px] font-inter hover:underline"
-          className="text-[#6969CC] text-[19.27px] font-inter hover:underline transition duration-200"
+          
         >
           Home
         </Link>
         <Link
           to="/about"
           className="text-black text-[19.27px] font-inter hover:underline hover:text-[#FF8C00] transition duration-200"
-          className="text-black text-[19.27px] font-inter hover:underline hover:text-[#FF8C00] transition duration-200"
+          
         >
           About
         </Link>
         <Link
           to="/signin"
-          className="text-black text-[19.27px] font-inter hover:underline hover:text-[#FF8C00] transition duration-200"
           className="text-black text-[19.27px] font-inter hover:underline hover:text-[#FF8C00] transition duration-200"
         >
           Sign In
