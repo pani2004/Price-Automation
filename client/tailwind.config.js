@@ -7,7 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        inter: ['Inter', 'sans-serif'], // Added Inter font
+        inter: ['Inter', 'sans-serif'],
+        sans: ['Rokkitt', 'sans-serif'],
+        anton: ['Anton SC', 'sans-serif'],
       },
       fontSize: {
         'custom': '19.27px', // Custom font size

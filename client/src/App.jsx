@@ -1,3 +1,4 @@
+import "./App.css"
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signin from './pages/Signin';
@@ -10,6 +11,7 @@ import ModelPage from './components/Model';
 import ServicePage from './components/Service';
 import SpecificationPage from './components/Specification';
 import ServiceResult from './pages/ServiceResult';
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,6 +23,8 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/' element={<HomePage/>}/>
         <Route path='/search1' element={<SearchComponent/>}/>
+        <Route path='/about' element={<AboutUs/>}/>
+        
         {/* Protected route for SearchComponent */}
         <Route element={<PrivateRoute />}>
           <Route path='/search' element={<SearchPage />} />

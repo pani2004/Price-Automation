@@ -29,7 +29,6 @@ function Signin() {
         },
       });
       const data = res.data;
-      console.log(data);
       dispatch(signInSuccess(data));
       navigate('/search');
     } catch (error) {
@@ -40,12 +39,20 @@ function Signin() {
       } else {
         dispatch(signInFailure('An error occurred. Please try again.'));
       }
-      console.error('Error during signup:', error.response ? error.response.data : error.message);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col overflow-hidden relative">
+    <div
+      className="min-h-screen flex flex-col overflow-hidden relative"
+      style={{
+        background: `linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), 
+                     linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(255, 255, 255) 33%, rgb(105, 105, 204) 66%, rgb(19, 19, 255) 100%), 
+                     linear-gradient(90deg, rgb(30, 30, 47) 12%, rgb(18, 18, 18) 37%, rgb(18, 18, 18) 85%, rgb(43, 43, 79) 100%)`,
+        backgroundBlendMode: 'darken',
+        backgroundSize: '100% 100%',
+      }}
+    >
       <Navbar />
       <div className="flex flex-1">
         <div className="flex justify-start items-center w-1/2 pl-16">
@@ -63,7 +70,7 @@ function Signin() {
                   className="rounded-lg p-4 focus:outline-none "
                   style={{
                     width: '572.98px',
-                    height: '98.05px',
+                    height: '88.05px',
                   }}
                   onChange={handleChange}
                 />
@@ -80,7 +87,7 @@ function Signin() {
                   className="rounded-lg p-4 focus:outline-none "
                   style={{
                     width: '572.98px',
-                    height: '98.05px',
+                    height: '88.05px',
                   }}
                   onChange={handleChange}
                 />
@@ -104,23 +111,18 @@ function Signin() {
               {loading ? 'Signing In...' : 'Login'}
             </button>
             {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
-            <div className="flex gap-2 mt-4">
+            <div className="flex gap-2 mt-4 text-white">
               <p>Don't have an account?</p>
               <Link to="/signup">
-                <span className="text-blue-700">Sign Up</span>
+                <span className="text-blue-400">Sign Up</span>
               </Link>
             </div>
           </form>
         </div>
 
         <div
-          className="absolute"
-          style={{
-            width: '650px',
-            height: '600px',
-            top: '10px',
-            left: '640px',
-          }}
+          className="w-full max-w-lg lg:w-1/2 mt-8 lg:mt-0"
+          style={{ minHeightHeight: '800px' }}
         >
           <img
             src="/3.png"
@@ -129,19 +131,9 @@ function Signin() {
           />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
 
 export default Signin;
-
-
-
-
-
-
-
-
-
-
