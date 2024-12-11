@@ -19,8 +19,8 @@ function AboutUs() {
       <div className="flex-1 flex flex-col lg:flex-row items-center justify-center gap-10 p-8">
         {/* Text Section */}
         <div className="flex-1 max-w-2xl text-white">
-          <h1 className="text-4xl font-bold mb-6">About Us</h1>
-          <p className="text-lg leading-7">
+          <h1 className="text-5xl font-bold mb-6 text-[#6969CC]">About Us</h1>
+          <p className="text-2xl leading-7">
             Welcome to <strong>MarketScout</strong>—where innovation meets smarter procurement.
             <br />
             <br />
@@ -42,7 +42,7 @@ function AboutUs() {
         {/* Image Section */}
         <div className="flex-1 max-w-lg">
           <img
-            src="/about-us.png" 
+            src="/4.png" 
             alt="About Us Illustration"
             className="w-full h-auto rounded-lg object-cover"
           />
