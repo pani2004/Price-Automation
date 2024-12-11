@@ -4,6 +4,7 @@ import ApiResponse from '../utils/ApiResponse.js';
 import CloudInfrastructure from '../models/CloudInfrastructure.js';
 import ConsultingService from '../models/consultingService.js';
 import Service from '../models/Service.js';
+import VehicleService from '../models/Vehicle.js';
 export const getServiceData = asyncHandler(async (req, res, next) => {
   const { serviceType } = req.params;
 
@@ -29,6 +30,10 @@ export const getServiceData = asyncHandler(async (req, res, next) => {
         data = [];
         if (!data.length) throw new ApiError(404, 'No cleaning services found');
         break;
+        case 'vehicle':
+          data = await VehicleService.find({});
+          if (!data.length) throw new ApiError(404, 'No vehicle services found');
+          break;
 
       default:
         throw new ApiError(400, 'Invalid service type');

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Footer from './Footer';
+import ModelResultPage from "../pages/ModelResultPage" // Import the ResultPage component
 
 function ModelPage() {
   const [itemName, setItemName] = useState('');
@@ -8,25 +8,37 @@ function ModelPage() {
   const [category, setCategory] = useState('');
   const [model, setModel] = useState('');
   const [message, setMessage] = useState('');
+  const [results, setResults] = useState(null); // Store results to pass to the results page
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(''); // Clear any previous messages
-    console.log('Selected Category:', category); // Log the selected category
+    setMessage(''); 
+    console.log('Selected Category:', category); 
+
+    const requestData = {
+      query: itemName,
+      make,
+      category,
+      model,
+    };
+
     try {
-      const response = await axios.post('/api/search', {
-        query: itemName,
-        make,
-        category,
-        model,
-      });
+      const response = await axios.post('/api/search', requestData);
+      setResults(response.data.data); // Save the results
+      setItemName('');
+      setMake('');
+      setCategory('');
+      setModel('');
       setMessage('Product details submitted successfully!');
-      console.log('Response:', response.data);
     } catch (error) {
       setMessage('Error submitting product details.');
       console.error('Error:', error);
     }
   };
+
+  if (results) {
+    return <ModelResultPage results={results} />; // Display ResultPage if results are available
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -68,7 +80,6 @@ function ModelPage() {
               <option value="" disabled>
                 Select Category
               </option>
-              <option value="vehicle">Vehicle</option>
               <option value="it_hardware">It Hardware</option>
             </select>
           </div>
@@ -99,7 +110,7 @@ function ModelPage() {
         )}
       </form>
 
-      <Footer />
+      {/* Footer component (if any) */}
     </div>
   );
 }

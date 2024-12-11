@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import ResultPage from '../pages/Specification';
 
 function SpecificationPage() {
   const [specificationName, setSpecificationName] = useState('');
   const [details, setDetails] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [results, setResults] = useState(null); // Store results to pass to the results page
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +21,7 @@ function SpecificationPage() {
 
     try {
       const response = await axios.post('/api/specification', requestData);
-      console.log('Response:', response.data);
+      setResults(response.data.data); // Save the results
       setSpecificationName('');
       setDetails('');
     } catch (err) {
@@ -29,9 +31,12 @@ function SpecificationPage() {
       setLoading(false);
     }
   };
+  if (results) {
+    return <ResultPage results={results} />;
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 bg-[#1F1F1F]">
       <h1 className="font-sans font-bold text-white text-center text-3xl sm:text-5xl mb-6 mt-10">
         Enter Specification Details
       </h1>

@@ -16,7 +16,6 @@ function ServicePage() {
     try {
       const response = await axios.get(`/api/services/${serviceType}`);
       console.log('Fetched Data:', response.data);
-      // Navigate to /serviceresult page with the data and serviceType
       navigate('/serviceresult', { state: { data: response.data, serviceType } });
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -46,25 +45,13 @@ function ServicePage() {
               Select Service Type
             </option>
             <option value="security">Security</option>
-            <option value="cleaning">Sanitation</option>
-            <option value="cleaning">Cleaning</option>
+            <option value="vehicle">Vehicle</option>
             <option value="cloudservice">Cloud Services</option>
             <option value="consultingservices">Consulting Services</option>
           </select>
         </div>
 
-        {/* Description Input */}
-        <div className="flex flex-col w-[473px]">
-          <p className="text-white font-medium mb-2 text-2xl">Description</p>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full h-[74px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px]"
-            placeholder="Optional: Provide additional information"
-          />
-        </div>
-
+       
         {/* Submit Button */}
         <div className="flex justify-center">
           <button

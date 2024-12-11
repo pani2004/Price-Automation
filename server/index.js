@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser"
 import authRoutes from "./routes/authRoutes.js";
 import searchRoutes from "./routes/searchRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
+import vehicleRoutes from "./routes/vehicleRoutes.js";
 const app = express();
 dotenv.config();
 app.use(express.json());
@@ -22,3 +23,4 @@ connectDb().then(()=>{
 app.use('/api',authRoutes)
 app.use('/api',searchRoutes)
 app.use('/api',serviceRoutes)
+app.use('/api',vehicleRoutes)

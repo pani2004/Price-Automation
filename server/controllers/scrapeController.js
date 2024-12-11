@@ -13,6 +13,7 @@ export const scrapeController = asyncHandler(async (req, res, next) => {
   if (!make) return next(new ApiError(400, 'Make parameter is required'));
   if (!model) return next(new ApiError(400, 'Model parameter is required'));
   const cacheKey = `${query}:${category}:${make}:${model}`;
+  console.log(cacheKey)
   try {
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData) {
@@ -48,6 +49,7 @@ export const scrapeController = asyncHandler(async (req, res, next) => {
       }))
     );
     await Product.insertMany(productsToSave);
+    console.log('Saving to Redis with key:', cacheKey, 'Data:', JSON.stringify(productsToSave));
     await redisClient.set(cacheKey, JSON.stringify(productsToSave), { EX: 3600 });
     return res
       .status(200)

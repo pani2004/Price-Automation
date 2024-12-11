@@ -75,7 +75,7 @@ function Signup() {
                 placeholder="Username"
                 id="username"
                 onChange={handleChange}
-                className="w-full h-full text-lg outline-none bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
+                className="w-full h-full text-lg outline-none text-white bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
                 style={{ padding: '5px' }}
               />
             </div>
@@ -85,7 +85,7 @@ function Signup() {
                 placeholder="Email"
                 id="email"
                 onChange={handleChange}
-                className="w-full h-full text-lg outline-none bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
+                className="w-full h-full text-lg outline-none bg-transparent text-white border-b border-gray-400 focus:border-blue-500 focus:ring-0"
                 style={{ padding: '5px' }}
               />
             </div>
@@ -95,7 +95,7 @@ function Signup() {
                 placeholder="Password"
                 id="password"
                 onChange={handleChange}
-                className="w-full h-full text-lg outline-none bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
+                className="w-full h-full text-lg outline-none text-white bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
                 style={{ padding: '5px' }}
               />
             </div>

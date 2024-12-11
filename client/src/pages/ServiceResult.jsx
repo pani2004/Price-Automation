@@ -14,9 +14,11 @@ function ServiceResult() {
   const consultingData = Array.isArray(data.data) ? data.data : [];
   const cloudServiceData = serviceType === 'cloudservice' ? data.data : [];
   const securityServiceData = serviceType === 'security' ? data.data : [];
+  const vehicleServiceData = serviceType === 'vehicle' ? data.data : [];
 
   console.log('Consulting Data:', consultingData);
   console.log('Cloud Service Data:', cloudServiceData);
+  console.log('Vehicle Service Data:', vehicleServiceData);
 
   if (!data || !serviceType) {
     return <div>Error: Missing data or service type</div>;
@@ -45,8 +47,7 @@ function ServiceResult() {
                     <td className="px-6 py-4">
                       {service?.siteLink ? (
                         <a
-                          href={service?.
-                            siteLink}
+                          href={service?.siteLink}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-400 underline hover:text-blue-600"
@@ -156,6 +157,47 @@ function ServiceResult() {
           </div>
         );
 
+      case 'vehicle':
+        return (
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Vehicle Service Details</h2>
+            <table className="min-w-full table-auto border-collapse bg-gray-800 text-white rounded-lg shadow-lg">
+              <thead>
+                <tr>
+                  <th className="px-6 py-4 text-left">Model</th>
+                  <th className="px-6 py-4 text-left">Price</th>
+                  <th className="px-6 py-4 text-left">Website Link</th>
+                  <th className="px-6 py-4 text-left">Available Variants</th>
+                </tr>
+              </thead>
+              <tbody>
+                {vehicleServiceData.map((vehicle, index) => (
+                  <tr key={index} className="border-t border-gray-700 hover:bg-gray-700">
+                    <td className="px-6 py-4">{vehicle?.Model || 'Not available'}</td>
+                    <td className="px-6 py-4">{vehicle?.Price ? `${vehicle?.Price}` : 'Not available'}</td>
+                    <td className="px-6 py-4">
+                      {vehicle?.WebsiteLink ? (
+                        <a
+                          href={vehicle?.
+                            WebsiteLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-400 underline hover:text-blue-600"
+                        >
+                          View Link
+                        </a>
+                      ) : (
+                        'Not available'
+                      )}
+                    </td>
+                    <td className="px-6 py-4">{vehicle?.AvailableVariants || 'Not available'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+
       default:
         return (
           <div>
@@ -188,10 +230,11 @@ function ServiceResult() {
           ? 'Consulting Service Details'
           : serviceType === 'cloudservice'
           ? 'Cloud Service Details'
+          : serviceType === 'vehicle'
+          ? 'Vehicle Service Details'
           : 'Service Details'}
       </h1>
       <div className="space-y-6 w-full max-w-7xl">
-        {/* Render the details dynamically based on serviceType */}
         {renderServiceDetails()}
       </div>
     </div>
@@ -199,4 +242,5 @@ function ServiceResult() {
 }
 
 export default ServiceResult;
+
 
