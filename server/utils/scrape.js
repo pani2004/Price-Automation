@@ -1,5 +1,9 @@
 import { chromium } from 'playwright';
-import scraperConfig from './scraperConfig.json' assert { type: 'json' };
+import { readFile } from 'fs/promises';
+
+const scraperConfig = JSON.parse(
+    await readFile(new URL('./scraperConfig.json', import.meta.url))
+); 
 
 export const scrape = async (query) => {
     const websites = Object.keys(scraperConfig);
@@ -72,4 +76,5 @@ export const scrape = async (query) => {
     console.log('Scraping complete.');
     return results;
 };
+
 
