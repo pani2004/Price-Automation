@@ -39,8 +39,7 @@ function ServicePage() {
           <select
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
-            className="w-full h-[61px] bg-[#FFAC1C]  text-black px-4 rounded-[8.3px]"
-            className="w-full h-[61px] bg-[#FF8C00] text-black px-4 rounded-[8.3px]"
+            className="w-full h-[61px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px]"
           >
             <option value="" disabled>
               Select Service Type
@@ -58,15 +57,13 @@ function ServicePage() {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full h-[74px] bg-[#FFAC1C]  text-black px-4 rounded-[8.3px]"
-            className="w-full h-[74px] bg-[#FF8C00] text-black px-4 rounded-[8.3px]"
+            className="w-full h-[74px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px]"
           />
         </div>
         <div className="flex justify-center">
           <button
             type="submit"
-            className="w-[199.64px] h-[55.75px] bg-[#FFAC1C]  text-black font-medium rounded-[8.3px] text-2xl"
-            className="w-[199.64px] h-[55.75px] bg-[#FF8C00] text-black font-medium rounded-[8.3px]"
+            className="w-[199.64px] h-[55.75px] bg-[#FFAC1C] text-black font-medium rounded-[8.3px] text-2xl"
           >
             Submit
           </button>
@@ -77,8 +74,3 @@ function ServicePage() {
 }
 
 export default ServicePage;
-
-
-
-
-

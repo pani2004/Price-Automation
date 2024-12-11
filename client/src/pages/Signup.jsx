@@ -118,21 +118,21 @@ function Signup() {
           <div className="flex gap-2 mt-5 justify-center text-white">
             <p>Have an account?</p>
             <Link to="/signin">
-              <span className="text-blue-300">Sign in</span>
+              <span className="text-blue-400">Sign in</span>
             </Link>
           </div>
         </div>
         <div
           className="ml-10"
           style={{
-            width: '563px',
-            height: '532px',
+            width: '570px',
+            height: '550px',
           }}
         >
           <img
             src="/3.png"
             alt="Sign Up Illustration"
-            className="w-[563px] h-[532px] object-cover rounded-md"
+            className="w-[570px] h-[540px] object-cover rounded-md"
           />
         </div>
       </div>

@@ -70,7 +70,7 @@ function Signin() {
                   className="rounded-lg p-4 focus:outline-none "
                   style={{
                     width: '572.98px',
-                    height: '98.05px',
+                    height: '88.05px',
                   }}
                   onChange={handleChange}
                 />
@@ -87,7 +87,7 @@ function Signin() {
                   className="rounded-lg p-4 focus:outline-none "
                   style={{
                     width: '572.98px',
-                    height: '98.05px',
+                    height: '88.05px',
                   }}
                   onChange={handleChange}
                 />
@@ -111,69 +111,15 @@ function Signin() {
               {loading ? 'Signing In...' : 'Login'}
             </button>
             {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
-            <div className="flex gap-2 mt-4">
+            <div className="flex gap-2 mt-4 text-white">
               <p>Don't have an account?</p>
               <Link to="/signup">
-                <span className="text-blue-700">Sign Up</span>
+                <span className="text-blue-400">Sign Up</span>
               </Link>
             </div>
           </form>
         </div>
 
-      <div className="flex flex-1 items-center justify-center flex-col lg:flex-row lg:gap-10 p-4">
-        {/* Form Section */}
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col items-center bg-transparent p-6"
-          style={{ width: '100%', maxWidth: '572.98px' }}
-        >
-          <div className="flex flex-col gap-4 mb-6 w-full">
-            <div className="relative">
-              <input
-                type="text"
-                id="email"
-                placeholder="Username"
-                className="rounded-lg p-4 focus:outline-none w-full"
-                style={{ height: '88.05px' }}
-                onChange={handleChange}
-              />
-              <div className="absolute bottom-0 left-0 w-full border-b border-gray-300" />
-            </div>
-            <div className="relative">
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                className="rounded-lg p-4 focus:outline-none w-full"
-                style={{ height: '88.05px' }}
-                onChange={handleChange}
-              />
-              <div className="absolute bottom-0 left-0 w-full border-b border-gray-300" />
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="rounded-full text-black font-semibold"
-            style={{
-              width: '150px',
-              height: '50px',
-              backgroundColor: '#FF8C00',
-              borderRadius: '30px',
-            }}
-            disabled={loading}
-          >
-            {loading ? 'Signing In...' : 'Login'}
-          </button>
-          {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
-          <div className="text-white flex gap-2 mt-4">
-            <p>Don't have an account?</p>
-            <Link to="/signup">
-              <span className="text-blue-300">Sign Up</span>
-            </Link>
-          </div>
-        </form>
-
-        {/* Image Section */}
         <div
           className="w-full max-w-lg lg:w-1/2 mt-8 lg:mt-0"
           style={{ minHeightHeight: '800px' }}
