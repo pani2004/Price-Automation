@@ -1,5 +1,8 @@
 import { chromium } from 'playwright';
-import hardwareScraperConfig from '../utils/hardwareScraperConfig.json' assert { type: 'json' };
+import { promises as fs } from 'fs';
+
+const hardwareScraperConfig = JSON.parse(await fs.readFile(new URL('../utils/hardwareScraperConfig.json', import.meta.url), 'utf8'));
+
 
 const scrapeCategory = async (query, config, category, make, model) => {
   const websites = Object.keys(config);
