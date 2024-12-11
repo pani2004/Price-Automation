@@ -26,6 +26,7 @@
       "product": ".search-results",
       "title": ".search-result-product-url",
       "price": ".price-type-price",
+      "rating": ".star-rating-container",
       "link":"a"
     }
   },

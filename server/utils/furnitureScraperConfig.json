@@ -36,6 +36,7 @@
             "product": ".container-1200",
             "title": ".heading",
             "price": ".price",
+            "rating": ".rating-box",
             "link": "a.heading"
         },
         "website": "woodenstreet"
@@ -59,7 +60,7 @@
             "price": ".price__sale",
             "link": "a"
         },
-        "website": "royaloak"
+        "website": "hometown"
   }
   
 }
