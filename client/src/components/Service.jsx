@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function ServicePage() {
   const [serviceType, setServiceType] = useState('');
   const [description, setDescription] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log({ serviceType, description });
+    if (!serviceType) {
+      alert('Please select a service type.');
+      return;
+    }
+
+    try {
+      const response = await axios.get(`/api/services/${serviceType}`);
+      console.log('Fetched Data:', response.data);
+      navigate('/serviceresult', { state: { data: response.data } });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      alert('Failed to fetch data. Please try again.');
+    }
   };
 
   return (
@@ -26,12 +40,16 @@ function ServicePage() {
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
             className="w-full h-[61px] bg-[#FFAC1C]  text-black px-4 rounded-[8.3px]"
+            className="w-full h-[61px] bg-[#FF8C00] text-black px-4 rounded-[8.3px]"
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select Service Type
             </option>
             <option value="security">Security</option>
             <option value="cleaning">Sanitation</option>
+            <option value="cleaning">Cleaning</option>
+            <option value="cloudservice">Cloud Services</option>
+            <option value="consultingservices">Consulting Services</option>
           </select>
         </div>
         <div className="flex flex-col w-[473px]">
@@ -41,12 +59,14 @@ function ServicePage() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="w-full h-[74px] bg-[#FFAC1C]  text-black px-4 rounded-[8.3px]"
+            className="w-full h-[74px] bg-[#FF8C00] text-black px-4 rounded-[8.3px]"
           />
         </div>
         <div className="flex justify-center">
           <button
             type="submit"
             className="w-[199.64px] h-[55.75px] bg-[#FFAC1C]  text-black font-medium rounded-[8.3px] text-2xl"
+            className="w-[199.64px] h-[55.75px] bg-[#FF8C00] text-black font-medium rounded-[8.3px]"
           >
             Submit
           </button>
@@ -57,3 +77,8 @@ function ServicePage() {
 }
 
 export default ServicePage;
+
+
+
+
+

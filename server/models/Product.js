@@ -7,7 +7,6 @@ const productSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    // required: true,
   },
   price: {
     type: String,
@@ -15,15 +14,6 @@ const productSchema = new mongoose.Schema({
   },
   link: {
     type: String,
-    // required: true,
-  },
-  description: {
-    type: String,
-    required: false,
-  },
-  imageUrl: {
-    type: String,
-    required: false,
   },
   site: {
     type: String,

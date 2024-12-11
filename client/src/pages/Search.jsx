@@ -49,6 +49,10 @@ function SearchPage() {
           to="/model"
           className="flex flex-col sm:flex-row items-center px-4 w-full sm:w-[514px] hover:scale-110 transition-transform duration-300"
           style={{
+            width: '514px',
+            height: '91px',
+            backgroundColor: 'rgba(255, 140, 0, 0.16)', 
+            borderRadius: '8px',
             height: '100px',
             backgroundColor: '#FFAC1C',
             borderRadius: '20px',
