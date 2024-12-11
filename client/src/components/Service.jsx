@@ -14,9 +14,7 @@ function ServicePage() {
       return;
     }
     try {
-      const response = await axios.get(`/api/services/${serviceType}`, {
-      });
-
+      const response = await axios.get(`/api/services/${serviceType}`);
       console.log('Fetched Data:', response.data);
       // Navigate to /serviceresult page with the data and serviceType
       navigate('/serviceresult', { state: { data: response.data, serviceType } });
@@ -39,8 +37,6 @@ function ServicePage() {
         {/* Service Type Dropdown */}
         <div className="flex flex-col w-[473px]">
           <p className="text-black font-medium mb-2">Service Type</p>
-        <div className="flex flex-col w-[473px] mt-10">
-          <p className="text-white font-medium mb-2 text-2xl">Service Type</p>
           <select
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
@@ -64,9 +60,8 @@ function ServicePage() {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full h-[74px] bg-[#FF8C00] text-black px-4 rounded-[8.3px]"
-            placeholder="Optional: Provide additional information"
             className="w-full h-[74px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px]"
+            placeholder="Optional: Provide additional information"
           />
         </div>
 
@@ -85,3 +80,4 @@ function ServicePage() {
 }
 
 export default ServicePage;
+
