@@ -1,9 +1,9 @@
 import express from 'express';
-import { fetchAndStoreSearchResults, getStoredResults } from '../controllers/searchController.js';
+import { scrapeController} from '../controllers/scrapeController.js';
+import { scrapeController1 } from '../controllers/productController.js';
 
 const router = express.Router();
 
-router.get('/search', fetchAndStoreSearchResults);
-router.get('/search/stored', getStoredResults);
-
+router.post('/search', scrapeController);
+router.post('/specification',scrapeController1);
 export default router;

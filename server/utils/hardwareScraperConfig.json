@@ -1,0 +1,90 @@
+{
+    "mdcomputers": {
+        "url": "https://mdcomputers.in/index.php?search={query}&submit_search=&route=product%2Fsearch",
+        "selectors": {
+            "product": ".products-list.row.nopadding-xs",
+            "title": "h4",
+            "link": "h4 a",
+            "price": ".price-new"
+        },
+        "website": "mdcomputers"
+    },
+    "e2zstore": {
+        "url": "https://e2zstore.com/?s={query}&post_type=product",
+        "selectors": {
+            "product": ".col.large-12",
+            "title": ".woocommerce-LoopProduct-link.woocommerce-loop-product__link",
+            "link": "a.woocommerce-LoopProduct-link.woocommerce-loop-product__link",
+            "price": ".woocommerce-Price-currencySymbol"
+        },
+        "website": "e2zstore"
+    },
+    "pcstudio": {
+        "url": "https://www.pcstudio.in/?s={query}&post_type=product&dgwt_wcas=1",
+        "selectors": {
+            "product": ".woocommerce.columns-4",
+            "title": ".title",
+            "link": "a.title",
+            "price": ".woocommerce-Price-amount.amount"
+        },
+        "website": "pcstudio"
+    },
+    "vedantcomputers": {
+    "url": "https://www.vedantcomputers.com/index.php?route=product/search&search={query}",
+    "selectors": {
+      "product": ".main-products.product-grid",
+      "title": ".name a",
+      "link": "a",
+      "price": ".price-new"
+    },
+    "website": "vedantcomputers"
+  },"gamenation": {
+    "url": "https://gamenation.in/Search?term={query}",
+    "selectors": {
+      "product": ".product-listing-box",
+      "title": ".product-card-1--middle",
+      "link": "a.product-card-1",
+      "price": ".product-price--display"
+    },
+    "website": "gamenation"
+  },"computechstore": {
+    "url": "https://computechstore.in/?s={query}&post_type=product&dgwt_wcas=1",
+    "selectors": {
+      "product": ".nasa-products-page-wrap.large-9.medium-12.columns.right.has-sidebar",
+      "title": ".name.woocommerce-loop-product__title.nasa-show-one-line",
+      "link": ".name.woocommerce-loop-product__title.nasa-show-one-line",
+      "price": ".woocommerce-Price-amount.amount"
+    },
+    "website": "computechstore"
+  },
+  "varietyinfotech": {
+    "url": "https://varietyinfotech.com/?s={query}&post_type=product&dgwt_wcas=1",
+    "selectors": {
+      "product": ".elementor-element.elementor-element-49b13667.etheme-elementor-product-align-left.elementor-widget.elementor-widget-woocommerce-etheme_archive_products",
+      "title": ".woocommerce-loop-product__title.etheme-product-grid-title",
+      "link": "a",
+      "price": ".woocommerce-Price-amount.amount"
+    },
+    "website": "varietyinfotech"
+  },
+ "mostechcomputers": {
+    "url": "https://mostechcomputers.in/?s={query}&post_type=product",
+    "selectors": {
+      "product": ".shop-container",
+      "title": ".woocommerce-loop-product__title",
+      "link": "a",
+      "price": ".woocommerce-Price-amount.amount"
+    },
+    "website": "mostechcomputers"
+  },
+  "tpstech": {
+    "url": "https://www.tpstech.in/search?q={query}&options%5Bprefix%5D=last",
+    "selectors": {
+      "product": ".product-grid-container",
+      "title": ".full-unstyled-link",
+      "price": ".price-item.price-item--regular",
+      "link": "a"
+    },
+    "website": "tpstech"
+  }
+}

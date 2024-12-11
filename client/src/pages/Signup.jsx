@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from '../components/Navbar'; 
+import Footer from '../components/Footer'; 
 
 function Signup() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -24,10 +27,10 @@ function Signup() {
           'Content-Type': 'application/json',
         },
       });
-      
+
       const data = res.data;
       console.log(data);
-      navigate('/signin')
+      navigate('/signin');
     } catch (error) {
       if (error.response && error.response.status === 409) {
         setError('User already exists');
@@ -41,47 +44,92 @@ function Signup() {
   };
 
   return (
-    <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input
-          type="text"
-          placeholder='username'
-          className='border p-3 rounded-lg'
-          id='username'
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          placeholder='email'
-          className='border p-3 rounded-lg'
-          id='email'
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder='password'
-          className='border p-3 rounded-lg'
-          id='password'
-          onChange={handleChange}
-        />
-        <button
-          className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
-          type='submit'
-          disabled={loading}
+    <div className="overflow-hidden" style={{ fontFamily: 'SF Pro Display, sans-serif' }}>
+      <Navbar />
+      <div
+        className="p-3 mx-auto flex items-center min-h-screen justify-center overflow-hidden"
+        style={{
+          maxWidth: '1280px',
+        }}
+      >
+        <div className="flex-1">
+          <h1 className="text-3xl font-semibold mb-5 text-center text-gray-800">Sign Up</h1>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-10 items-center"
+            style={{ width: '100%' }}
+          >
+            <div className="relative" style={{ width: '573px' }}>
+              <input
+                type="text"
+                placeholder="Username"
+                id="username"
+                onChange={handleChange}
+                className="w-full h-full text-lg outline-none bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
+                style={{ padding: '5px' }}
+              />
+            </div>
+            <div className="relative" style={{ width: '573px' }}>
+              <input
+                type="email"
+                placeholder="Email"
+                id="email"
+                onChange={handleChange}
+                className="w-full h-full text-lg outline-none bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
+                style={{ padding: '5px' }}
+              />
+            </div>
+            <div className="relative" style={{ width: '573px' }}>
+              <input
+                type="password"
+                placeholder="Password"
+                id="password"
+                onChange={handleChange}
+                className="w-full h-full text-lg outline-none bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
+                style={{ padding: '5px' }}
+              />
+            </div>
+            <button
+              className="rounded-lg text-base font-semibold"
+              style={{
+                width: '150px',
+                height: '50px',
+                backgroundColor: '#FF8C00',
+                color: 'black',
+              }}
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? 'Signing Up...' : 'Register'}
+            </button>
+          </form>
+          {error && <p className="text-red-500 mt-4">{error}</p>}
+          <div className="flex gap-2 mt-5 justify-center">
+            <p>Have an account?</p>
+            <Link to="/signin">
+              <span className="text-blue-700">Sign in</span>
+            </Link>
+          </div>
+        </div>
+        <div
+          className="ml-10"
+          style={{
+            width: '563px',
+            height: '532px',
+          }}
         >
-          {loading ? 'Signing Up...' : 'Sign Up'}
-        </button>
-      </form>
-      {error && <p className='text-red-500 mt-4'>{error}</p>}
-      <div className='flex gap-2 mt-5'>
-        <p>Have an account?</p>
-        <Link to='/sign-in'>
-          <span className='text-blue-700'>Sign in</span>
-        </Link>
+          <img
+            src="/3.png" 
+            alt="Sign Up Illustration"
+            className="w-[563px] h-[532px] object-cover rounded-md"
+          />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
 
 export default Signup;
+
+

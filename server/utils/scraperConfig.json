@@ -1,0 +1,12 @@
+{
+    "croma": {
+        "url": "https://www.croma.com/searchB?q={query}%3Arelevance&text={query}",
+        "selectors": {
+          "product": ".product-list",
+          "title": "h3.product-title.plp-prod-title a",
+          "price": "span.amount.plp-srp-new-amount",
+          "link": "a"
+        },
+        "website": "croma"
+      }
+}

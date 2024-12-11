@@ -1,0 +1,52 @@
+{
+    "networkdevices": {
+        "url": "https://networkdevicesinc.com/apps/omega-search/?type=product&q={query}",
+        "selectors": {
+          "product": ".os-content",
+          "title": "a.os-e.os-name",
+          "price": "div.os-e.os-price",
+          "link": "a.os-e.os-name"
+        },
+        "website": "networkdevices"
+      },
+      
+      "serverbasket": {
+        "url": "https://www.serverbasket.com/?s={query}&post_type=product",
+        "selectors": {
+          "product": ".mf-shop-content",
+          "title": "h2.woo-loop-product__title",
+          "price": ".woocommerce-Price-amount.amount",
+          "link": "h2.woo-loop-product__title a"
+        },
+        "website": "serverbasket"
+      },
+      "cdw": {
+    "url": "https://www.cdw.com/search/{category}/?w={query}&key={query}&akr=0&fta=1",
+    "selectors": {
+      "product": ".search-results",
+      "title": ".search-result-product-url",
+      "price": ".price-type-price",
+      "link":"a"
+    }
+  },
+  "fgtechstore": {
+    "url": "https://fgtechstore.com/?s={query}&post_type=product",
+    "selectors": {
+      "product": ".wd-products-element",
+      "title": ".wd-entities-title",
+      "link": ".wd-entities-title a",
+      "price": ".woocommerce-Price-amount.amount"
+    },
+    "website": "fgtechstore"
+  },
+  "iconicitstore": {
+    "url": "https://iconicitstore.com/?s={query}&product_cat=0&post_type=product",
+    "selectors": {
+      "product": ".site-main",
+      "title": ".woocommerce-loop-product__title",
+      "price": ".woocommerce-Price-amount.amount",
+      "link": "a.woocommerce-LoopProduct-link.woocommerce-loop-product__link"
+    },
+    "website": "iconicitstore"
+  }
+}
