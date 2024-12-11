@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function ServicePage() {
   const [serviceType, setServiceType] = useState('');
   const [description, setDescription] = useState('');
-  const [serviceData, setServiceData] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!serviceType) {
       alert('Please select a service type.');
       return;
@@ -16,8 +16,8 @@ function ServicePage() {
 
     try {
       const response = await axios.get(`/api/services/${serviceType}`);
-      setServiceData(response.data);
       console.log('Fetched Data:', response.data);
+      navigate('/serviceresult', { state: { data: response.data } });
     } catch (error) {
       console.error('Error fetching data:', error);
       alert('Failed to fetch data. Please try again.');
@@ -67,50 +67,13 @@ function ServicePage() {
           </button>
         </div>
       </form>
-
-      {serviceData?.data?.length > 0 && (
-        <div className="mt-6 w-[800px]">
-          <h2 className="font-bold text-lg mb-4 text-black">Fetched Service Data:</h2>
-          <table className="table-auto w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-200 text-black">
-                <th className="border border-gray-300 px-4 py-2">Provider</th>
-                <th className="border border-gray-300 px-4 py-2">Service Name</th>
-                <th className="border border-gray-300 px-4 py-2">Price</th>
-                <th className="border border-gray-300 px-4 py-2">Link</th>
-              </tr>
-            </thead>
-            <tbody>
-              {serviceData.data[0]?.cloud_providers.map((provider, providerIndex) =>
-                provider.services.map((service, serviceIndex) => (
-                  <tr key={`${providerIndex}-${serviceIndex}`} className="text-black">
-                    <td className="border border-gray-300 px-4 py-2">
-                      {serviceIndex === 0 ? provider.provider : ''}
-                    </td>
-                    <td className="border border-gray-300 px-4 py-2">{service.name}</td>
-                    <td className="border border-gray-300 px-4 py-2">{service.price}</td>
-                    <td className="border border-gray-300 px-4 py-2">
-                      <a
-                        href={service.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 underline"
-                      >
-                        Visit
-                      </a>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      )}
     </div>
   );
 }
 
 export default ServicePage;
+
+
 
 
 

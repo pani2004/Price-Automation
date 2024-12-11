@@ -9,6 +9,7 @@ import SearchPage from './pages/Search';
 import ModelPage from './components/Model';
 import ServicePage from './components/Service';
 import SpecificationPage from './components/Specification';
+import ServiceResult from './pages/ServiceResult';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,6 +27,7 @@ function App() {
           <Route path='/model' element={<ModelPage />} />
           <Route path='/service' element={<ServicePage/>}/>
           <Route path='/specification' element={<SpecificationPage/>}/>
+          <Route path='/serviceresult' element={<ServiceResult/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
