@@ -20,7 +20,7 @@ const HomePage = () => {
         <div className="text-center lg:text-left lg:w-1/2 w-full lg:mt-0">
           <div className="text-[#FFFFFF] font-sf-pro text-[28px] sm:text-[32px] lg:text-[36px] leading-[1.4]">
             Get accurate price insights for products and services in 
-            <span className="text-[#FF8C00] font-bold"> just a few clicks!</span>
+            <span className="text-[#6969CC] font-bold"> just a few clicks!</span>
           </div>
           <div className="mt-8 sm:mt-10 text-white font-sf-pro text-[22px] sm:text-[28px] lg:text-[33px] leading-[1.6]">
             Our streamlined platform ensures transparency, fairness, and efficiency in procurement decisions.

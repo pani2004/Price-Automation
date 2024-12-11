@@ -42,7 +42,7 @@ function AboutUs() {
         {/* Image Section */}
         <div className="flex-1 max-w-lg">
           <img
-            src="/about-us.png" 
+            src="/4.png" 
             alt="About Us Illustration"
             className="w-full h-auto rounded-lg object-cover"
           />

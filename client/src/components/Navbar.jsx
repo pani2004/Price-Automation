@@ -22,9 +22,9 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className="w-[85%] sm:w-full max-w-[769px] h-[50px] sm:h-[71.16px] bg-black px-4 py-2 mx-auto flex items-center justify-between rounded-[40px] mt-4 sm:px-[32.11px] sm:py-[24.08px] sm:rounded-[81px] sm:mt-8 z-10"
+      className="w-[85%] sm:w-full max-w-[769px] h-[50px] sm:h-[71.16px] bg-white px-4 py-2 mx-auto flex items-center justify-between rounded-[40px] mt-4 sm:px-[32.11px] sm:py-[24.08px] sm:rounded-[81px] sm:mt-8 z-10"
     >
-      <div className="text-white text-[19.27px] font-inter">Market Scout</div>
+      <div className="text-black text-[19.27px] font-inter">Market Scout</div>
       <div className="lg:hidden flex items-center">
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -53,19 +53,19 @@ const Navbar = () => {
       >
         <Link
           to="/"
-          className="text-[#FF8C00] text-[19.27px] font-inter hover:underline hover:text-white transition duration-200"
+          className="text-[#6969CC] text-[19.27px] font-inter hover:underline transition duration-200"
         >
           Home
         </Link>
         <Link
           to="/about"
-          className="text-white text-[19.27px] font-inter hover:underline hover:text-[#FF8C00] transition duration-200"
+          className="text-black text-[19.27px] font-inter hover:underline hover:text-[#FF8C00] transition duration-200"
         >
           About
         </Link>
         <Link
           to="/signin"
-          className="text-white text-[19.27px] font-inter hover:underline hover:text-[#FF8C00] transition duration-200"
+          className="text-black text-[19.27px] font-inter hover:underline hover:text-[#FF8C00] transition duration-200"
         >
           Sign In
         </Link>
