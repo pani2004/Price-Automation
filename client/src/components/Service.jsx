@@ -31,22 +31,26 @@ function ServicePage() {
       className="flex flex-col items-center justify-center min-h-screen"
       style={{ width: '1280px', height: '500px', margin: '0 auto' }}
     >
-      <h1 className="font-sans font-bold text-black text-center text-3xl mb-6">
+      <h1 className="font-sans font-bold text-white text-center text-5xl mb-10">
         Enter Service Details
       </h1>
+
       <form className="space-y-6" onSubmit={handleSubmit}>
         {/* Service Type Dropdown */}
         <div className="flex flex-col w-[473px]">
           <p className="text-black font-medium mb-2">Service Type</p>
+        <div className="flex flex-col w-[473px] mt-10">
+          <p className="text-white font-medium mb-2 text-2xl">Service Type</p>
           <select
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
-            className="w-full h-[61px] bg-[#FF8C00] text-black px-4 rounded-[8.3px]"
+            className="w-full h-[61px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px]"
           >
             <option value="" disabled>
               Select Service Type
             </option>
             <option value="security">Security</option>
+            <option value="cleaning">Sanitation</option>
             <option value="cleaning">Cleaning</option>
             <option value="cloudservice">Cloud Services</option>
             <option value="consultingservices">Consulting Services</option>
@@ -55,13 +59,14 @@ function ServicePage() {
 
         {/* Description Input */}
         <div className="flex flex-col w-[473px]">
-          <p className="text-black font-medium mb-2">Description</p>
+          <p className="text-white font-medium mb-2 text-2xl">Description</p>
           <input
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="w-full h-[74px] bg-[#FF8C00] text-black px-4 rounded-[8.3px]"
             placeholder="Optional: Provide additional information"
+            className="w-full h-[74px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px]"
           />
         </div>
 
@@ -69,7 +74,7 @@ function ServicePage() {
         <div className="flex justify-center">
           <button
             type="submit"
-            className="w-[199.64px] h-[55.75px] bg-[#FF8C00] text-black font-medium rounded-[8.3px]"
+            className="w-[199.64px] h-[55.75px] bg-[#FFAC1C] text-black font-medium rounded-[8.3px] text-2xl"
           >
             Submit
           </button>
@@ -80,8 +85,3 @@ function ServicePage() {
 }
 
 export default ServicePage;
-
-
-
-
-

@@ -1,43 +1,72 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; 
-import Footer from '../components/Footer'; 
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 function SearchPage() {
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTypingFinished, setIsTypingFinished] = useState(false);
+  const fullText = 'Find Exactly What You Need';
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setDisplayedText((prev) => fullText.slice(0, index + 1));
+      index++;
+      if (index === fullText.length) {
+        clearInterval(interval);
+        setIsTypingFinished(true);
+      }
+    }, 50); // Typing speed in milliseconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div
-      className="flex flex-col min-h-screen justify-between items-center"
-      style={{ width: '1280px', margin: '0 auto' }}
+      className="w-full flex flex-col min-h-screen justify-between items-center px-4 sm:px-6 lg:px-8"
+      style={{
+        margin: '0 auto',
+        userSelect: 'none', // Prevent text selection
+      }}
     >
       <h1
-        className="font-sans font-bold text-black text-center mt-10 text-3xl"
+        className="font-sans font-bold text-white text-center mt-20 text-2xl sm:text-7xl"
         style={{
-          width: '602px',
-          height: '46px',
-          fontFamily: 'SF Pro Display, sans-serif',
+          fontFamily: 'Rokkitt, sans-serif',
         }}
       >
-        Find Exactly What You Need
+        {isTypingFinished ? (
+          <>
+            Find{' '}
+            <span style={{ color: 'orange' }}>Exactly</span> What You Need
+          </>
+        ) : (
+          displayedText
+        )}
       </h1>
-      <div className="mt-10 flex flex-wrap justify-center gap-6">
+      <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-10 w-full">
         <Link
           to="/model"
-          className="flex items-center px-4"
+          className="flex flex-col sm:flex-row items-center px-4 w-full sm:w-[514px] hover:scale-110 transition-transform duration-300"
           style={{
             width: '514px',
             height: '91px',
             backgroundColor: 'rgba(255, 140, 0, 0.16)', 
             borderRadius: '8px',
+            height: '100px',
+            backgroundColor: '#FFAC1C',
+            borderRadius: '20px',
           }}
         >
           <img
             src="/1.3.png"
             alt="Query Image 1"
-            style={{ width: '106px', height: '75px', marginRight: '16px' }}
+            className="w-[75px] sm:w-[106px] h-[56px] sm:h-[75px] mb-2 sm:mb-0 sm:mr-4"
           />
           <p
-            className="font-sans font-medium text-black"
+            className="font-sans font-medium text-black text-center sm:text-left text-sm sm:text-base lg:text-lg"
             style={{
-              fontFamily: 'SF Pro Display, sans-serif',
+              fontFamily: 'Rokkitt, sans-serif',
             }}
           >
             Query based on exact Make/Model of a Product
@@ -45,23 +74,22 @@ function SearchPage() {
         </Link>
         <Link
           to="/specification"
-          className="flex items-center px-4"
+          className="flex flex-col sm:flex-row items-center px-4 w-full sm:w-[514px] hover:scale-110 transition-transform duration-300"
           style={{
-            width: '514px',
-            height: '91px',
-            backgroundColor: 'rgba(255, 140, 0, 0.16)', // Updated with 16% opacity
-            borderRadius: '8px',
+            height: '100px',
+            backgroundColor: '#FFAC1C',
+            borderRadius: '20px',
           }}
         >
           <img
             src="/1.2.png"
             alt="Query Image 2"
-            style={{ width: '69px', height: '72px', marginRight: '16px' }}
+            className="w-[60px] sm:w-[69px] h-[60px] sm:h-[72px] mb-2 sm:mb-0 sm:mr-4"
           />
           <p
-            className="font-sans font-medium text-black"
+            className="font-sans font-medium text-black text-center sm:text-left text-sm sm:text-base lg:text-lg"
             style={{
-              fontFamily: 'SF Pro Display, sans-serif',
+              fontFamily: 'Rokkitt, sans-serif',
             }}
           >
             Query based on Most Relevant Specifications of a Product
@@ -69,36 +97,33 @@ function SearchPage() {
         </Link>
         <Link
           to="/service"
-          className="flex items-center px-4"
+          className="flex flex-col sm:flex-row items-center px-4 w-full sm:w-[514px] hover:scale-110 transition-transform duration-300"
           style={{
-            width: '514px',
-            height: '91px',
-            backgroundColor: 'rgba(255, 140, 0, 0.16)',
-            borderRadius: '8px',
-            marginTop: '16px', 
+            height: '100px',
+            backgroundColor: '#FFAC1C',
+            borderRadius: '20px',
           }}
         >
           <img
             src="/1.1.png"
             alt="Query Image 3"
-            style={{ width: '106px', height: '75px', marginRight: '16px' }}
+            className="w-[75px] sm:w-[106px] h-[56px] sm:h-[75px] mb-2 sm:mb-0 sm:mr-4"
           />
           <p
-            className="font-sans font-medium text-black"
+            className="font-sans font-medium text-black text-center sm:text-left text-sm sm:text-base lg:text-lg"
             style={{
-              fontFamily: 'SF Pro Display, sans-serif',
+              fontFamily: 'Rokkitt, sans-serif',
             }}
           >
             Query based on Basic Requirements of a Service
           </p>
         </Link>
       </div>
-      <Footer />
+      <div className="w-screen">
+        <Footer />
+      </div>
     </div>
   );
 }
 
 export default SearchPage;
-
-
-
