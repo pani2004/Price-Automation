@@ -5,6 +5,7 @@
         "product": ".clip-product-listing-container.container.ng-star-inserted",
         "title": ".product-name.color-tertiary.text-md.font-medium.ng-star-inserted",
         "price": ".product-offer-price.font-bold.text-xl.ng-star-inserted",
+        "rating": ".product-card-rating.ng-star-inserted",
         "link": "a"
     },
     "website": "pepperfry"
@@ -38,5 +39,27 @@
             "link": "a.heading"
         },
         "website": "woodenstreet"
-    }
+  },
+  "ikea":{
+    "url": "https://www.ikea.com/in/en/search/?q={query}",
+        "selectors": {
+            "product": ".plp-product-list__products",
+            "title": ".notranslate.plp-price-module__product-name",
+            "price": ".plp-price-module__primary-currency-price",
+            "link": " a.plp-price-link-wrapper.link",
+            "rating": ".plp-ratings.plp-ratings--small.plp-ratings--product-card.notranslate"
+        },
+        "website": "ikea"
+  },
+  "hometown":{
+    "url": "https://www.hometown.in/pages/search?q={query}",
+        "selectors": {
+            "product": ".wizzy-search-results-list swiper.feature-collection-home.feature-collection-home_template--22306533769520__featured_collection_QtcxA6.grid.product-grid.contains-card.contains-card--product.contains-card--standard.grid--4-col-desktop.grid--2-col-tablet-down.swiper-initialized.swiper-horizontal",
+            "title": ".full-unstyled-link",
+            "price": ".price__sale",
+            "link": "a"
+        },
+        "website": "royaloak"
+  }
+  
 }
