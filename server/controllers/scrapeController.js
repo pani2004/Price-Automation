@@ -58,6 +58,7 @@ export const scrapeController = asyncHandler(async (req, res, next) => {
         imageUrl: product.imageUrl || null,
         site: website,
         timestamp, // Adding timestamp for each product
+        rating: product.rating || null, // Add the rating field
       }))
     );
 
@@ -77,4 +78,3 @@ export const scrapeController = asyncHandler(async (req, res, next) => {
     return next(new ApiError(500, "Failed to scrape or save products"));
   }
 });
-

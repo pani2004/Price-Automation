@@ -3,7 +3,6 @@ import { promises as fs } from 'fs';
 
 const hardwareScraperConfig = JSON.parse(await fs.readFile(new URL('../utils/hardwareScraperConfig.json', import.meta.url), 'utf8'));
 
-
 const scrapeCategory = async (query, config, category, make, model) => {
   const websites = Object.keys(config);
   const results = [];
@@ -25,30 +24,34 @@ const scrapeCategory = async (query, config, category, make, model) => {
       await page.goto(url, { waitUntil: 'load', timeout: 120000 });
 
       await page.waitForSelector(websiteConfig.selectors.product, { state: 'visible', timeout: 30000 });
-      const product = await page.evaluate(({ websiteConfig, make, model }) => {
-        const productElement = document.querySelector(websiteConfig.selectors.product);
-        if (productElement) {
-          const title = productElement.querySelector(websiteConfig.selectors.title)?.textContent.trim();
-          const priceElement = productElement.querySelector(websiteConfig.selectors.price);
-          const price = priceElement?.childNodes[0]?.textContent.trim();
-          const link = productElement.querySelector(websiteConfig.selectors.link)?.href;
+      const products = await page.evaluate(({ websiteConfig, make, model }) => {
+        return Array.from(document.querySelectorAll(websiteConfig.selectors.product))
+          .slice(0, 5) // Limit to 5 products
+          .map((productElement) => {
+            const title = productElement.querySelector(websiteConfig.selectors.title)?.textContent.trim();
+            const priceElement = productElement.querySelector(websiteConfig.selectors.price);
+            const price = priceElement?.childNodes[0]?.textContent.trim();
+            const link = productElement.querySelector(websiteConfig.selectors.link)?.href;
+            const rating = productElement.querySelector(websiteConfig.selectors.rating)?.textContent.trim(); // Add rating
 
-          if (title && price && link) {
-            return {
-              title,
-              price,
-              link: link.startsWith('http') ? link : `https://${websiteConfig.website}.com${link}`,
-              make,
-              model,
-            };
-          }
-        }
-        return null;
+            if (title && price && link) {
+              return {
+                title,
+                price,
+                link: link.startsWith('http') ? link : `https://${websiteConfig.website}.com${link}`,
+                make,
+                model,
+                rating, // Include rating
+              };
+            }
+            return null;
+          })
+          .filter(product => product !== null);
       }, { websiteConfig, make, model });
 
-      if (product) {
-        results.push({ website, products: [product] });
-        console.log(`Scraped 1 product from ${website}.`);
+      if (products.length > 0) {
+        results.push({ website, products });
+        console.log(`Scraped ${products.length} products from ${website}.`);
       }
 
       await context.close();
@@ -62,9 +65,6 @@ const scrapeCategory = async (query, config, category, make, model) => {
   return results;
 };
 
-
-
 export const scrapeHardware = (query, make, model) =>
-scrapeCategory(query, hardwareScraperConfig, 'Hardware', make, model);
-
+  scrapeCategory(query, hardwareScraperConfig, 'Hardware', make, model);
 

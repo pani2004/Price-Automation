@@ -115,6 +115,63 @@ function ServiceResult() {
   const renderServiceDetails = () => {
     switch (serviceType) {
       case 'security':
+  const getLowestPrice = () => {
+    const prices = securityServiceData
+      .map(service => {
+        const amount = service.amount ? String(service.amount).replace(/[^0-9.]/g, '') : null;
+        return parseFloat(amount);
+      })
+      .filter(price => !isNaN(price));
+    return prices.length > 0 ? Math.min(...prices) : null;
+  };
+
+  const lowestPrice = getLowestPrice();
+
+  return (
+    <div>
+      <table className="min-w-full table-auto border-collapse bg-[#00498929] text-black rounded-lg shadow-lg">
+        <thead>
+          <tr>
+            <th className="px-6 py-4 text-left">Service Provider</th>
+            <th className="px-6 py-4 text-left">Service Offered</th>
+            <th className="px-6 py-4 text-left">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          {securityServiceData.map((service, index) => {
+            const amount = service.amount ? String(service.amount).replace(/[^0-9.]/g, '') : null;
+            const price = parseFloat(amount);
+            const isLowestPrice = price === lowestPrice;
+
+            return (
+              <tr key={index} className="border-t border-gray-700 hover:bg-gray-700">
+                <td className="px-6 py-4">
+                  {service?.siteLink ? (
+                    <a
+                      href={service?.siteLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 underline hover:text-blue-600"
+                    >
+                      {service?.name || 'Not available'}
+                    </a>
+                  ) : (
+                    service?.name || 'Not available'
+                  )}
+                </td>
+                <td className="px-6 py-4">{service?.service || 'Not available'}</td>
+                <td className={`px-6 py-4 ${isLowestPrice ? 'bg-green-600' : ''}`}>
+                  {service?.amount || 'Not available'}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+
+
         return (
           <div>
             <table className="min-w-full table-auto border-collapse bg-[#00498929] text-black rounded-lg">
@@ -151,6 +208,81 @@ function ServiceResult() {
           </div>
         );
       case 'cloudservice':
+          // Find the minimum price
+      const allPrices = cloudServiceData.flatMap((cloud) =>
+        cloud?.cloud_providers?.flatMap((provider) =>
+          provider?.services?.map((service) => service?.price || Infinity)
+        )
+      );
+      const minPrice = Math.min(...allPrices.filter((price) => typeof price === 'number'));
+
+      return (
+        <div>
+          <h2 className="text-2xl text-white text-center font-semibold mb-4">Cloud Services</h2>
+          {cloudServiceData.map((cloud, index) => (
+            <div key={index} className="mb-6">
+              <h3 className="text-xl text-white text-center font-semibold mb-4">
+                Region: {cloud?.region || 'Not available'}
+              </h3>
+              {cloud?.cloud_providers?.map((provider, providerIndex) => (
+                <div key={providerIndex} className="mb-4">
+                  <h4 className="font-medium text-lg">
+                    {provider?.provider ? (
+                      <a
+                        href={provider?.link || '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 underline hover:text-blue-600"
+                      >
+                        {provider?.provider}
+                      </a>
+                    ) : (
+                      'Not available'
+                    )}
+                  </h4>
+                  <table className="min-w-full table-auto border-collapse bg-[#00498929] text-black rounded-lg shadow-lg">
+                    <thead>
+                      <tr>
+                        <th className="px-6 py-4 text-left">Category</th>
+                        <th className="px-6 py-4 text-left">Service Name</th>
+                        <th className="px-6 py-4 text-left">Pricing</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {provider?.services?.map((service, serviceIndex) => (
+                        <tr key={serviceIndex} className="border-t border-gray-700 hover:bg-gray-700">
+                          <td className="px-6 py-4">
+                            {service?.category ? (
+                              <a
+                                href={service?.link || '#'}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-400 underline hover:text-blue-600"
+                              >
+                                {service?.category || 'Not available'}
+                              </a>
+                            ) : (
+                              'Not available'
+                            )}
+                          </td>
+                          <td className="px-6 py-4">{service?.service_name || 'Not available'}</td>
+                          <td
+                            className={`px-6 py-4 ${
+                              service?.price === minPrice ? 'bg-green-500 text-black font-bold' : ''
+                            }`}
+                          >
+                            {service?.price ? `$${service?.price} ${service?.pricing_unit}` : 'Not available'}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      );
         return (
           <div>
             <h2 className="text-2xl text-white text-center font-semibold mb-4">Cloud Services</h2>
@@ -216,6 +348,55 @@ function ServiceResult() {
         );
 
       case 'consultingservices':
+  // Find the minimum cost from the consultingData, ensuring valid numeric values
+  const minCost = Math.min(
+    ...consultingData.map(service => parseFloat(service?.EstimatedCost) || Infinity)
+  );
+
+  return (
+    <div>
+      <h2 className="text-2xl font-semibold mb-4">Consulting Services</h2>
+      <table className="min-w-full table-auto border-collapse bg-[#00498929] text-black rounded-lg shadow-lg">
+        <thead>
+          <tr>
+            <th className="px-6 py-4 text-left">Service Provider</th>
+            <th className="px-6 py-4 text-left">Service Offered</th>
+            <th className="px-6 py-4 text-left">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          {consultingData.map((service, index) => {
+            const isLowestPrice = parseFloat(service?.EstimatedCost) === minCost;
+
+            return (
+              <tr key={index} className="border-t border-gray-700 hover:bg-gray-700">
+                <td className="px-6 py-4">
+                  {service?.ServiceProvider ? (
+                    <a
+                      href={service?.Website || '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 underline hover:text-blue-600"
+                    >
+                      {service?.ServiceProvider}
+                    </a>
+                  ) : (
+                    'Not available'
+                  )}
+                </td>
+                <td className="px-6 py-4">{service?.ServiceOffered || 'Not available'}</td>
+                <td
+                  className={`px-6 py-4 ${isLowestPrice ? 'bg-green-500' : ''}`} // Highlight the lowest price
+                >
+                  {service?.EstimatedCost || 'Not available'}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
         return (
           <div>
             <h2 className="text-2xl font-semibold mb-4">Consulting Services</h2>
@@ -256,21 +437,23 @@ function ServiceResult() {
         );
 
       default:
-        return <div>No data available for this service type.</div>;
+      return <div>No data available for this service type.</div>;
     }
   };
 
   return (
     <div className="p-6">
-      {renderServiceDetails()}
-      <button
-        onClick={generatePDF}
-        className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-      >
-        Generate PDF
-      </button>
-    </div>
-  );
+  {renderServiceDetails()}
+  <div className="flex justify-center mt-6"> {/* Added flex and justify-center for centering */}
+    <button
+      onClick={generatePDF}
+      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+    >
+      Generate PDF
+    </button>
+  </div>
+</div>
+  )
 }
 
 export default ServiceResult;

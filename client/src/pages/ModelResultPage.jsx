@@ -13,16 +13,17 @@ function ResultPage({ results }) {
     doc.setFontSize(18);
     doc.text("Specification Results", 105, 20, { align: "center" });
 
-    const headers = ["#", "Title", "Price", "Site", "Timestamp"];
+    const headers = ["#", "Title", "Price", "Quantity", "Rating", "Site", "Timestamp"];
     const data = results.map((item, index) => [
       index + 1,
       item.title || 'N/A',
       item.price || 'N/A',
+      1, // Quantity column, filled with 1 for all
+      item.rating || 'N/A',
       item.site || 'N/A',
-      item.timestamp || 'N/A'
+      item.timestamp || 'N/A',
     ]);
 
-    // Add the table to the PDF
     doc.autoTable({
       head: [headers],
       body: data,
@@ -41,7 +42,7 @@ function ResultPage({ results }) {
       margin: { top: 30, left: 10, right: 10 },
       tableWidth: 'auto',
       didDrawCell: (data) => {
-        if (data.column.index === 3) {
+        if (data.column.index === 5) {
           const link = results[data.row.index].link; 
           if (link) {
             doc.link(data.cell.x, data.cell.y, data.cell.width, data.cell.height, { url: link });
@@ -50,22 +51,18 @@ function ResultPage({ results }) {
       },
     });
 
-    // Add PDF generation time at the bottom of the PDF
-    const generationTime = new Date().toLocaleString(); // Get the current date and time
+    const generationTime = new Date().toLocaleString();
     doc.setFontSize(10);
     doc.text(`PDF Generated on: ${generationTime}`, 105, doc.internal.pageSize.height - 10, { align: "center" });
 
-    // Save the PDF
     doc.save("specification_results.pdf");
   };
 
-  // Function to extract numeric value from price string
   const extractPrice = (price) => {
     const match = price.match(/[\d,]+/);
     return match ? parseFloat(match[0].replace(/,/g, '')) : Infinity;
   };
 
-  // Find the minimum price
   const minPrice = Math.min(...results.map(item => extractPrice(item.price)));
 
   return (
@@ -88,6 +85,8 @@ function ResultPage({ results }) {
               <th className="px-4 py-2 border border-[#FFAC1C]">#</th>
               <th className="px-4 py-2 border border-[#FFAC1C]">Title</th>
               <th className="px-4 py-2 border border-[#FFAC1C]">Price</th>
+              <th className="px-4 py-2 border border-[#FFAC1C]">Quantity</th>
+              <th className="px-4 py-2 border border-[#FFAC1C]">Rating</th>
               <th className="px-4 py-2 border border-[#FFAC1C]">Site</th>
               <th className="px-4 py-2 border border-[#FFAC1C]">Timestamp</th>
             </tr>
@@ -99,8 +98,10 @@ function ResultPage({ results }) {
                   <td className="px-4 py-2 border border-[#FFAC1C]">{index + 1}</td>
                   <td className="px-4 py-2 border border-[#FFAC1C]">{item.title}</td>
                   <td className={`px-4 py-2 border border-[#FFAC1C] ${extractPrice(item.price) === minPrice ? 'bg-green-500' : ''}`}>
-                    {item.price}
+                    {item.price || 'N/A'}
                   </td>
+                  <td className="px-4 py-2 border border-[#FFAC1C]">1</td> {/* Quantity column */}
+                  <td className="px-4 py-2 border border-[#FFAC1C]">{item.rating || 'N/A'}</td>
                   <td className="px-4 py-2 border border-[#FFAC1C]">
                     <a
                       href={item.link}
@@ -116,7 +117,7 @@ function ResultPage({ results }) {
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="text-center px-4 py-2 text-white">
+                <td colSpan="7" className="text-center px-4 py-2 text-white">
                   No results found
                 </td>
               </tr>
@@ -129,6 +130,7 @@ function ResultPage({ results }) {
 }
 
 export default ResultPage;
+
 
 
 

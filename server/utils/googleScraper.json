@@ -1,0 +1,12 @@
+{
+    "google_shopping": {
+        "url": "https://www.google.com/search?q={query}&hl=en&tbm=shop&psb=1&uact=5&sclient=products-cc",
+        "selectors": {
+            "product": ".sh-sr__shop-result-group.Qlx7of",
+            "title": ".tAxDx",
+            "price": ".XrAfOe",
+            "link": ".shntl a"
+        },
+        "website": "google_shopping"
+    }
+}

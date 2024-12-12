@@ -54,6 +54,7 @@ function ModelPage() {
       >
         <Navbar />
       </div>
+      <div className="flex flex-col bg-[#DCDCDC] items-center justify-center min-h-screen">
       <div className="flex flex-col bg-[#DCDCDC] items-center justify-center min-h-screen overflow-x-hidden">
 
         <form className="space-y-6" onSubmit={handleSubmit}>
