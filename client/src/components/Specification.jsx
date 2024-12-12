@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ResultPage from '../pages/Specification';
+import Navbar from '../components/Navbar'; // Import the Navbar component
 
 function SpecificationPage() {
   const [specificationName, setSpecificationName] = useState('');
@@ -43,62 +44,70 @@ function SpecificationPage() {
       setLoading(false);
     }
   };
+
   if (results) {
     return <ResultPage results={results} />;
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 bg-[#1F1F1F]">
-      <h1 className="font-sans font-bold text-white text-center text-3xl sm:text-5xl mb-6 mt-10">
-        Enter Specification Details
-      </h1>
-
-      <form
-        className="space-y-6 w-full max-w-[1280px] flex flex-col items-center"
-        onSubmit={handleSubmit}
+    <>
+      <div
+        className="w-full flex justify-center items-center"
+        style={{
+          width: '1600px',
+          height: '156px',
+          backgroundColor: '#004989',
+        }}
       >
-        <div className="flex flex-col w-full sm:w-[473px] mt-6">
-          <p className="text-white font-medium mb-2 text-xl sm:text-2xl">Item Name</p>
-          <input
-            type="text"
-            value={specificationName}
-            onChange={(e) => setSpecificationName(e.target.value)}
-            className="w-full h-[65px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px] opacity-80"
-            placeholder="Enter item name"
-          />
-        </div>
-        <div className="flex flex-col w-full sm:w-[473px]">
-          <p className="text-white font-medium mb-2 text-xl sm:text-2xl">Category</p>
-          <select
-            value={details}
-            onChange={(e) => setDetails(e.target.value)}
-            className="w-full h-[65px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px] opacity-80"
-          >
-            <option value="" disabled>Select a category</option>
-            <option value="furniture">Furniture</option>
-            <option value="network">Network Devices</option>
-            <option value="stationary">Stationary</option>
-            <option value="it_hardware">IT Hardware</option>
-          </select>
-        </div>
-
-        {error && (
-          <div className="text-red-500 text-sm">
-            <p>{error}</p>
+        <Navbar />
+      </div>
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 bg-[#DCDCDC]">
+        <form
+          className="space-y-6 w-full max-w-[1280px] flex flex-col items-center"
+          onSubmit={handleSubmit}
+        >
+          <div className="flex flex-col w-full sm:w-[473px] mt-6">
+            <p className="text-black font-medium mb-2 text-xl sm:text-2xl">Item Name</p>
+            <input
+              type="text"
+              value={specificationName}
+              onChange={(e) => setSpecificationName(e.target.value)}
+              className="w-full h-[65px] bg-[#00498929] text-black px-4 rounded-[8.3px] opacity-80"
+              placeholder="Enter item name"
+            />
           </div>
-        )}
+          <div className="flex flex-col w-full sm:w-[473px]">
+            <p className="text-black font-medium mb-2 text-xl sm:text-2xl">Category</p>
+            <select
+              value={details}
+              onChange={(e) => setDetails(e.target.value)}
+              className="w-full h-[65px] bg-[#00498929] text-black px-4 rounded-[8.3px] opacity-80"
+            >
+              <option value="" disabled>Select a category</option>
+              <option value="furniture">Furniture</option>
+              <option value="network">Network Devices</option>
+              <option value="stationary">Stationary</option>
+            </select>
+          </div>
 
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="w-[199.64px] h-[55.75px] bg-[#FFAC1C] opacity-[0.69] text-black font-medium rounded-[8.3px] text-xl sm:text-2xl"
-            disabled={loading}
-          >
-            {loading ? 'Analyzing...' : 'Submit'}
-          </button>
-        </div>
-      </form>
-    </div>
+          {error && (
+            <div className="text-red-500 text-sm">
+              <p>{error}</p>
+            </div>
+          )}
+
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="w-[199.64px] h-[55.75px] bg-[#004989B0] opacity-[0.69] text-white font-medium rounded-[8.3px] text-xl sm:text-2xl"
+              disabled={loading}
+            >
+              {loading ? 'Analyzing...' : 'Submit'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 

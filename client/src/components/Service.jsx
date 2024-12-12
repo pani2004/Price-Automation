@@ -50,8 +50,6 @@ function ServicePage() {
             <option value="consultingservices">Consulting Services</option>
           </select>
         </div>
-
-       
         {/* Submit Button */}
         <div className="flex justify-center">
           <button

@@ -57,12 +57,8 @@ function ResultPage({ results }) {
     const generationTime = new Date().toLocaleString();
     doc.setFontSize(10);
     doc.text(`PDF Generated on: ${generationTime}`, 105, doc.internal.pageSize.height - 10, { align: "center" });
-
-    // Save the PDF
     doc.save("specification_results.pdf");
   };
-
-  // Function to extract numeric value from price string
   const extractPrice = (price) => {
     const match = price.match(/[\d,]+/);
     return match ? match[0].replace(/,/g, '') : 'N/A';
