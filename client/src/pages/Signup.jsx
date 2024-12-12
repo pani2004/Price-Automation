@@ -55,7 +55,7 @@ function Signup() {
         }}
       >
         <div className="flex-1">
-          <h1 className="text-3xl font-semibold mb-5 text-center text-gray-300">Sign Up</h1>
+          <h1 className="text-3xl font-semibold mb-5 text-center text-black">Sign Up</h1>
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-10 items-center"
@@ -67,7 +67,7 @@ function Signup() {
                 placeholder="Username"
                 id="username"
                 onChange={handleChange}
-                className="w-full h-full text-lg outline-none text-white bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
+                className="w-full h-full text-lg outline-none text-black bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
                 style={{ padding: '5px' }}
               />
             </div>
@@ -77,7 +77,7 @@ function Signup() {
                 placeholder="Email"
                 id="email"
                 onChange={handleChange}
-                className="w-full h-full text-lg outline-none bg-transparent text-white border-b border-gray-400 focus:border-blue-500 focus:ring-0"
+                className="w-full h-full text-lg outline-none bg-transparent text-black border-b border-gray-400 focus:border-blue-500 focus:ring-0"
                 style={{ padding: '5px' }}
               />
             </div>
@@ -87,16 +87,16 @@ function Signup() {
                 placeholder="Password"
                 id="password"
                 onChange={handleChange}
-                className="w-full h-full text-lg outline-none text-white bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
+                className="w-full h-full text-lg outline-none text-black bg-transparent border-b border-gray-400 focus:border-blue-500 focus:ring-0"
                 style={{ padding: '5px' }}
               />
             </div>
             <button
-              className="rounded-lg text-base font-semibold"
+              className="rounded-lg text-base font-semibold text-white"
               style={{
                 width: '150px',
                 height: '50px',
-                backgroundColor: '#FF8C00',
+                backgroundColor: '#004989',
                 color: 'black',
                 marginTop: '20px',
               }}
@@ -107,8 +107,8 @@ function Signup() {
             </button>
           </form>
           {error && <p className="text-red-500 mt-4">{error}</p>}
-          <div className="flex gap-2 mt-5 justify-center text-white">
-            <p>Have an account?</p>
+          <div className="flex gap-2 mt-5 justify-center text-black">
+            <p>Don't have an account?</p>
             <Link to="/signin">
               <span className="text-blue-400">Sign in</span>
             </Link>

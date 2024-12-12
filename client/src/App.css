@@ -15,7 +15,9 @@
     }
   }
 
-
+body{
+  user-select: none;
+}
 
 
 
