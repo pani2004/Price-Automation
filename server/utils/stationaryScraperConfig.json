@@ -9,6 +9,7 @@
     },
     "website": "scooboo"
     },
+    
     "bansalstationers": {
     "url": "https://bansalstationers.com/search?q={query}&options%5Bprefix%5D=last",
     "selectors": {
