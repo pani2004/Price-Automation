@@ -48,7 +48,7 @@ function SpecificationPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 bg-[#1F1F1F]">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 bg-[#ffffff]">
       <h1 className="font-sans font-bold text-white text-center text-3xl sm:text-5xl mb-6 mt-10">
         Enter Specification Details
       </h1>

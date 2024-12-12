@@ -109,7 +109,7 @@ function ModelPage() {
           <div className="flex justify-center mt-6">
             <button
               type="submit"
-              className="w-[199.64px] h-[55.75px] bg-[#004989B0] text-black font-medium rounded-[8.3px] text-2xl"
+              className="w-[199.64px] h-[55.75px] bg-[#004989B0] text-white font-medium rounded-[8.3px] text-2xl"
             >
               Submit
             </button>
