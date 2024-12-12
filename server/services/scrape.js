@@ -4,7 +4,7 @@ const networkDevicesConfig = JSON.parse(await readFile(new URL('../utils/network
 const furnitureConfig = JSON.parse(await readFile(new URL('../utils/furnitureScraperConfig.json', import.meta.url)));
 const stationaryConfig = JSON.parse(await readFile(new URL('../utils/stationaryScraperConfig.json', import.meta.url)));
 const scraperConfig = {
-    networkdevices: networkDevicesConfig,
+    network: networkDevicesConfig,
     furniture: furnitureConfig,
     stationary: stationaryConfig
 };

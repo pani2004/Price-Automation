@@ -2,7 +2,7 @@
     "mdcomputers": {
         "url": "https://mdcomputers.in/index.php?search={query}&submit_search=&route=product%2Fsearch",
         "selectors": {
-            "product": ".products-list.row.nopadding-xs",
+            "product": ".product-layout.product-grid.product-grid-4.col-lg-3.col-md-4.col-sm-6.col-xs-12",
             "title": "h4",
             "link": "h4 a",
             "price": ".price-new",
@@ -13,7 +13,7 @@
     "e2zstore": {
         "url": "https://e2zstore.com/?s={query}&post_type=product",
         "selectors": {
-            "product": ".col.large-12",
+            "product": ".product-small.col.has-hover.product.type-product.post-420599.status-publish.first.instock.product_cat-xbox-game-pass.product_tag-game-pass-ultimate.product_tag-pc-game-pass.product_tag-windows-10.product_tag-xbox.product_tag-xbox-game-pass.product_tag-xbox-game-pass-ultimate.product_tag-xbox-india.product_tag-xbox-live-gold.has-post-thumbnail.downloadable.sold-individually.shipping-taxable.purchasable.product-type-simple",
             "title": ".woocommerce-LoopProduct-link.woocommerce-loop-product__link",
             "link": "a.woocommerce-LoopProduct-link.woocommerce-loop-product__link",
             "price": ".woocommerce-Price-currencySymbol",
@@ -34,17 +34,14 @@
     "vedantcomputers": {
     "url": "https://www.vedantcomputers.com/index.php?route=product/search&search={query}",
     "selectors": {
-      "product": ".main-products.product-grid",
+      "product": ".product-layout.has-extra-button",
       "title": ".name a",
       "link": "a",
       "price": ".price-new",
       "rating": ".rating-stars"
-
     },
     "website": "vedantcomputers"
-  },
-  
-  "gamenation": {
+  },"gamenation": {
     "url": "https://gamenation.in/Search?term={query}",
     "selectors": {
       "product": ".product-listing-box",
@@ -53,10 +50,8 @@
       "price": ".product-price--display"
     },
     "website": "gamenation"
-  },
-  
-  "computechstore": {
-    "url": "https://co-mputechstore.in/?s={query}&post_type=product&dgwt_wcas=1",
+  },"computechstore": {
+    "url": "https://computechstore.in/?s={query}&post_type=product&dgwt_wcas=1",
     "selectors": {
       "product": ".nasa-products-page-wrap.large-9.medium-12.columns.right.has-sidebar",
       "title": ".name.woocommerce-loop-product__title.nasa-show-one-line",
@@ -91,8 +86,8 @@
       "product": ".product-grid-container",
       "title": ".full-unstyled-link",
       "price": ".price-item.price-item--regular",
-      "rating": ".alireviews-review-star-rating",
-      "link": "a"
+      "link": "a",
+      "rating": ".alireviews-review-star-rating"
     },
     "website": "tpstech"
   }

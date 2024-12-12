@@ -92,7 +92,6 @@ function SpecificationPage() {
               <option value="furniture">Furniture</option>
               <option value="network">Network Devices</option>
               <option value="stationary">Stationary</option>
-              <option value="it_hardware">IT Hardware</option>
             </select>
           </div>
 

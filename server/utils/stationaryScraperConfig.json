@@ -2,18 +2,17 @@
     "scooboo": {
     "url": "https://scooboo.in/search?options%5Bprefix%5D=last&q={query}&filter.p.product_type=",
     "selectors": {
-        "product": ".main-products-grid__results.relative.flex-auto",
+        "product": ".js-pagination-result",
         "title": ".card__title.font-bold.mb-1",
         "price": ".price__current",
         "link": "a.card-link.text-current.js-prod-link"
     },
     "website": "scooboo"
     },
-    
     "bansalstationers": {
     "url": "https://bansalstationers.com/search?q={query}&options%5Bprefix%5D=last",
     "selectors": {
-        "product": ".template-search__results.collection.page-width",
+        "product": ".grid__item.scroll-trigger animate--slide-in",
         "title": ".card__heading.h5",
         "price": ".price-item.price-item--regular",
         "link": "a.full-unstyled-link"
@@ -23,7 +22,7 @@
  "skybluestationerymart": {
     "url": "https://www.skybluestationerymart.com/a/search?type=product%2Carticle&q={query}",
     "selectors": {
-        "product": ".new-grid.search-grid",
+        "product": ".grid-item__content",
         "title": ".grid-product__title",
         "price": ".grid-product__price--current",
         "link": "a.grid-item__link"
@@ -33,7 +32,7 @@
  "inkarto": {
     "url": "https://inkarto.com/search?options%5Bunavailable_products%5D=last&options%5Bprefix%5D=last&options%5Bfields%5D=title%2Cvendor%2Cproduct_type%2Cvariants.title&q={query}",
     "selectors": {
-        "product": "#CollectionProductGrid",
+        "product": "m:column.m:w-1/2.sm:m:w-4/12.lg:m:w-3/12",
         "title": ".m-product-card__title",
         "price": ".m-price-item.m-price-item--regular",
         "link": ".m-product-card__name"

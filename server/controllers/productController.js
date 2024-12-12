@@ -12,7 +12,7 @@ export const scrapeController1 = asyncHandler(async (req, res, next) => {
     return next(new ApiError(400, 'Query and details parameters are required'));
   }
 
-  const validCategories = ['furniture', 'stationary', 'networkdevices', 'network devices'];
+  const validCategories = ['furniture', 'stationary', 'networkdevices', 'network devices', 'network'];
   const normalizedDetails = details.toLowerCase().replace(/\s+/g, '');
   if (!validCategories.map(category => category.replace(/\s+/g, '')).includes(normalizedDetails)) {
     return next(new ApiError(400, 'Invalid details parameter.'));
@@ -42,6 +42,7 @@ export const scrapeController1 = asyncHandler(async (req, res, next) => {
         price: product.price || 'No price provided',
         link: product.link || 'No link provided',
         site: result.website,
+        rating: product.rating || 'No rating provided',  // Add rating here
         timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }).replace(",", ""),
       }))
     );
@@ -57,6 +58,7 @@ export const scrapeController1 = asyncHandler(async (req, res, next) => {
         }))
       );
     }
+
     await redisClient.set(cacheKey, JSON.stringify(productsToSave), { EX: 3600 });
     return res.status(200).json(new ApiResponse(200, {
       products: productsToSave,
@@ -67,6 +69,7 @@ export const scrapeController1 = asyncHandler(async (req, res, next) => {
     return next(new ApiError(500, 'Failed to scrape and save data'));
   }
 });
+
 
 
 

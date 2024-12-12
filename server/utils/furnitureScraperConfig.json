@@ -2,10 +2,10 @@
     "pepperfry": {
     "url": "https://www.pepperfry.com/site_product/search?q={query}",
     "selectors": {
-        "product": ".clip-product-listing-container.container.ng-star-inserted",
+        "product": ".product-card-container.cursor-pointer.pc-padding-bottom.product-card-container-hover.ng-star-inserted",
         "title": ".product-name.color-tertiary.text-md.font-medium.ng-star-inserted",
         "price": ".product-offer-price.font-bold.text-xl.ng-star-inserted",
-        "rating": ".product-card-rating.ng-star-inserted",
+        "rating": ".product-card-rating span.text-sm",
         "link": "a"
     },
     "website": "pepperfry"
@@ -13,7 +13,7 @@
   "bossescabin": {
       "url": "https://www.bossescabin.com/?s={query}&post_type=product&dgwt_wcas=1",
       "selectors": {
-          "product": ".bc-shop-catlisting", 
+          "product": ".bc_listpdt_wrap.col-xl-4.col-sm-6.shipfast.product.type-product.post-26563.status-publish.first.instock.product_cat-office-cabinets.has-post-thumbnail.shipping-taxable.purchasable.product-type-simple", 
           "title": ".bc_listview_jswrap.bc_plistheadlink.woocommerce-loop-product__title", 
           "price": ".woocommerce-Price-amount.amount", 
           "link": "a.d-block"
@@ -23,7 +23,7 @@
   "urbanladder": {
       "url": "https://www.urbanladder.com/products/search?utf8=%E2%9C%93&keywords={query}",
       "selectors": {
-          "product": ".productlist.small-block-grid-3",
+          "product": ".productbox",
           "title": ".name",
           "price": ".pricing",
           "link": ".product-title-block"
@@ -33,7 +33,7 @@
   "woodenstreet": {
         "url": "https://www.woodenstreet.com/search&search={query}",
         "selectors": {
-            "product": ".container-1200",
+            "product": ".cat_11.col",
             "title": ".heading",
             "price": ".price strong",
             "rating": ".rating-box",
@@ -44,7 +44,7 @@
   "ikea":{
     "url": "https://www.ikea.com/in/en/search/?q={query}",
         "selectors": {
-            "product": ".plp-product-list__products",
+            "product": ".plp-fragment-wrapper",
             "title": ".notranslate.plp-price-module__product-name",
             "price": ".plp-price__integer",
             "link": " a.plp-price-link-wrapper.link",
@@ -55,7 +55,7 @@
   "hometown":{
     "url": "https://www.hometown.in/pages/search?q={query}",
         "selectors": {
-            "product": ".wizzy-search-results",
+            "product": ".card-wrapper.product-card-wrapper.underline-links-hover",
             "title": ".full-unstyled-link",
             "price": ".price-item.price-item--sale.price-item--last",
             "link": "a"

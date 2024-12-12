@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import io
 import base64
 from flask_cors import CORS
+from fuzzywuzzy import process
 
 # Set matplotlib backend
 matplotlib.use('Agg')
@@ -52,7 +53,7 @@ def analyze():
         # Get dataset and product name from request
         dataset_name = request.json.get('dataset_name', None)
         product_name = request.json.get('product_name', None)
-        
+
         if not dataset_name or dataset_name not in loaded_data:
             return jsonify({"error": "Invalid or missing dataset name"}), 400
         if not product_name:
@@ -61,14 +62,23 @@ def analyze():
         # Retrieve the selected dataset
         dataset = loaded_data[dataset_name]
         monthly_prices = dataset["reshaped"]
-        
-        # Filter data for the specific product
-        product_data = monthly_prices[monthly_prices["Product Name"] == product_name]
-        if product_data.empty:
-            return jsonify({"error": f"Product '{product_name}' not found in dataset '{dataset_name}'"}), 404
+
+        # Perform exact substring matching
+        exact_matches = monthly_prices[monthly_prices["Product Name"].str.contains(product_name, case=False, na=False)]
+
+        # If no exact matches, perform fuzzy matching
+        if exact_matches.empty:
+            all_products = monthly_prices["Product Name"].unique()
+            best_match, score = process.extractOne(product_name, all_products)
+
+            if score >= 70:  # Set a threshold for fuzzy matching
+                product_name = best_match
+                exact_matches = monthly_prices[monthly_prices["Product Name"] == best_match]
+            else:
+                return jsonify({"error": f"No exact or close match found for '{product_name}' in dataset '{dataset_name}'"}), 404
 
         # Aggregate data to handle duplicates (mean price per month)
-        product_data = product_data.groupby("Month", as_index=False).agg({"Price": "mean"})
+        product_data = exact_matches.groupby("Month", as_index=False).agg({"Price": "mean"})
 
         # Compute statistics for the specific product
         product_stats = {
@@ -107,6 +117,7 @@ def analyze():
             trend_graph_base64 = base64.b64encode(img_file.read()).decode('utf-8')
 
         # Generate correlation heatmap for price columns
+        price_columns = [col for col in dataset["original"].columns if "Price" in col]
         corr_matrix = dataset["original"][price_columns].corr()
         heatmap_filename = f"correlation_heatmap_{dataset_name}.png"
         heatmap_path = os.path.join('static/images', heatmap_filename)

@@ -45,7 +45,6 @@ function ServicePage() {
               Select Service Type
             </option>
             <option value="security">Security</option>
-            <option value="vehicle">Vehicle</option>
             <option value="cloudservice">Cloud Services</option>
             <option value="consultingservices">Consulting Services</option>
           </select>

@@ -12,6 +12,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: false, 
   },
+  rating:{
+    type:String,
+    default: 'No rating provided'
+  },
   link: {
     type: String,
   },

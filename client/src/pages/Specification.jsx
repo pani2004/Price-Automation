@@ -16,11 +16,14 @@ function ResultPage({ results }) {
     doc.setFontSize(18);
     doc.text("Specification Results", 105, 20, { align: "center" });
 
-    const headers = ["#", "Title", "Price", "Site", "Timestamp"];
+    // Updated headers with Quantity column
+    const headers = ["#", "Title", "Price", "Quantity", "Rating", "Site", "Timestamp"];
     const data = results.products.map((item, index) => [
       index + 1,
       item.title || 'N/A',
       extractPrice(item.price) || 'N/A',
+      1,  // Default quantity
+      item.rating || 'N/A',
       item.site || 'N/A',
       item.timestamp || 'N/A',
     ]);
@@ -45,7 +48,7 @@ function ResultPage({ results }) {
       tableWidth: 'auto',
       didDrawCell: (data) => {
         // Check if the cell contains the "Site" column
-        if (data.column.index === 3) {
+        if (data.column.index === 5) {  // Adjusted to reflect the Site column index
           const link = results.products[data.row.index].link;
           if (link) {
             doc.link(data.cell.x, data.cell.y, data.cell.width, data.cell.height, { url: link });
@@ -65,7 +68,6 @@ function ResultPage({ results }) {
     return match ? match[0].replace(/,/g, '') : 'N/A';
   };
 
-  // Find the minimum price
   const minPrice = Math.min(...results.products.map(item => parseFloat(extractPrice(item.price))));
 
   return (
@@ -88,6 +90,8 @@ function ResultPage({ results }) {
               <th className="px-4 py-2 border border-[#FFAC1C]">#</th>
               <th className="px-4 py-2 border border-[#FFAC1C]">Title</th>
               <th className="px-4 py-2 border border-[#FFAC1C]">Price</th>
+              <th className="px-4 py-2 border border-[#FFAC1C]">Quantity</th>
+              <th className="px-4 py-2 border border-[#FFAC1C]">Rating</th>
               <th className="px-4 py-2 border border-[#FFAC1C]">Site</th>
               <th className="px-4 py-2 border border-[#FFAC1C]">Timestamp</th>
             </tr>
@@ -101,6 +105,8 @@ function ResultPage({ results }) {
                   <td className={`px-4 py-2 border border-[#FFAC1C] ${parseFloat(extractPrice(item.price)) === minPrice ? 'bg-green-500' : ''}`}>
                     {extractPrice(item.price)}
                   </td>
+                  <td className="px-4 py-2 border border-[#FFAC1C]">1</td>  {/* Added Quantity column */}
+                  <td className="px-4 py-2 border border-[#FFAC1C]">{item.rating || 'N/A'}</td>
                   <td className="px-4 py-2 border border-[#FFAC1C]">
                     <a
                       href={item.link}
@@ -116,7 +122,7 @@ function ResultPage({ results }) {
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="text-center px-4 py-2 text-white">
+                <td colSpan="7" className="text-center px-4 py-2 text-white">
                   No results found
                 </td>
               </tr>
@@ -130,3 +136,4 @@ function ResultPage({ results }) {
 }
 
 export default ResultPage;
+
