@@ -28,7 +28,7 @@ function ServicePage() {
       className="flex flex-col items-center justify-center min-h-screen"
       style={{ width: '1280px', height: '500px', margin: '0 auto' }}
     >
-      <h1 className="font-sans font-bold text-white text-center text-5xl mb-10">
+      <h1 className="font-sans font-bold text-black text-center text-5xl mb-10">
         Enter Service Details
       </h1>
 
@@ -39,7 +39,7 @@ function ServicePage() {
           <select
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
-            className="w-full h-[61px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px]"
+            className="w-full h-[61px] bg-[#00498929] opacity-[0.8] text-black px-4 rounded-[8.3px]"
           >
             <option value="" disabled>
               Select Service Type
@@ -54,7 +54,7 @@ function ServicePage() {
         <div className="flex justify-center">
           <button
             type="submit"
-            className="w-[199.64px] h-[55.75px] bg-[#FFAC1C] text-black font-medium rounded-[8.3px] text-2xl"
+            className="w-[199.64px] h-[55.75px] bg-[#004989e0] text-white font-medium rounded-[8.3px] text-2xl"
           >
             Submit
           </button>
