@@ -59,6 +59,7 @@ function ResultPage({ results }) {
     doc.text(`PDF Generated on: ${generationTime}`, 105, doc.internal.pageSize.height - 10, { align: "center" });
     doc.save("specification_results.pdf");
   };
+
   const extractPrice = (price) => {
     const match = price.match(/[\d,]+/);
     return match ? match[0].replace(/,/g, '') : 'N/A';
@@ -94,10 +95,12 @@ function ResultPage({ results }) {
           <tbody>
             {results.products.length > 0 ? (
               results.products.map((item, index) => (
-                <tr key={index} className={`text-white text-center ${parseFloat(extractPrice(item.price)) === minPrice ? 'bg-green-500' : ''}`}>
+                <tr key={index} className="text-white text-center">
                   <td className="px-4 py-2 border border-[#FFAC1C]">{index + 1}</td>
                   <td className="px-4 py-2 border border-[#FFAC1C]">{item.title}</td>
-                  <td className="px-4 py-2 border border-[#FFAC1C]">{extractPrice(item.price)}</td>
+                  <td className={`px-4 py-2 border border-[#FFAC1C] ${parseFloat(extractPrice(item.price)) === minPrice ? 'bg-green-500' : ''}`}>
+                    {extractPrice(item.price)}
+                  </td>
                   <td className="px-4 py-2 border border-[#FFAC1C]">
                     <a
                       href={item.link}
