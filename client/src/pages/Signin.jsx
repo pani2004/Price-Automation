@@ -45,10 +45,10 @@ function Signin() {
   return (
     <div className="w-full min-h-screen bg-white flex flex-col overflow-x-hidden overflow-y-hidden font-sf-display">
       {/* Navbar Section */}
-      <div className="bg-[#004989] h-[150px]"> 
+      <div className="bg-[#004989] h-[150px] flex items-center justify-center">
         <Navbar />
       </div>
-      <div className="flex flex-1 bg-[#DCDCDC]">
+      <div className="flex flex-1">
         <div className="flex justify-start items-center w-1/2 pl-16">
           <form
             onSubmit={handleSubmit}
@@ -115,7 +115,7 @@ function Signin() {
           <img
             src="/2.png"
             alt="Placeholder"
-            className="w-[527px] h-[336.96px]  mt-24  left-40"
+            className="w-[527px] h-[336.96px] mt-24 left-40"
           />
         </div>
       </div>
@@ -125,4 +125,3 @@ function Signin() {
 }
 
 export default Signin;
-

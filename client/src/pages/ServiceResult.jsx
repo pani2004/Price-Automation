@@ -117,7 +117,7 @@ function ServiceResult() {
       case 'security':
         return (
           <div>
-            <table className="min-w-full table-auto border-collapse bg-gray-800 text-white rounded-lg shadow-lg">
+            <table className="min-w-full table-auto border-collapse bg-[#00498929] text-black rounded-lg">
               <thead>
                 <tr>
                   <th className="px-6 py-4 text-left">Service Provider</th>
@@ -127,7 +127,7 @@ function ServiceResult() {
               </thead>
               <tbody>
                 {securityServiceData.map((service, index) => (
-                  <tr key={index} className="border-t border-gray-700 hover:bg-gray-700">
+                  <tr key={index} className="border-t border-gray-400 hover:bg-blue-300">
                     <td className="px-6 py-4">
                       {service?.siteLink ? (
                         <a
@@ -175,7 +175,7 @@ function ServiceResult() {
                         'Not available'
                       )}
                     </h4>
-                    <table className="min-w-full table-auto border-collapse bg-gray-800 text-white rounded-lg shadow-lg">
+                    <table className="min-w-full table-auto border-collapse bg-[#00498929] text-black rounded-lg">
                       <thead>
                         <tr>
                           <th className="px-6 py-4 text-left">Category</th>
@@ -185,7 +185,7 @@ function ServiceResult() {
                       </thead>
                       <tbody>
                         {provider?.services?.map((service, serviceIndex) => (
-                          <tr key={serviceIndex} className="border-t border-gray-700 hover:bg-gray-700">
+                          <tr key={serviceIndex} className="border-t border-gray-400 hover:bg-blue-200">
                             <td className="px-6 py-4">
                               {service?.category ? (
                                 <a
@@ -219,7 +219,7 @@ function ServiceResult() {
         return (
           <div>
             <h2 className="text-2xl font-semibold mb-4">Consulting Services</h2>
-            <table className="min-w-full table-auto border-collapse bg-gray-800 text-white rounded-lg shadow-lg">
+            <table className="min-w-full table-auto border-collapse bg-[#00498929] text-black rounded-lg">
               <thead>
                 <tr>
                   <th className="px-6 py-4 text-left">Service Provider</th>
