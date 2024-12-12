@@ -36,7 +36,6 @@
             "product": ".container-1200",
             "title": ".heading",
             "price": ".price strong",
-            "price": ".price",
             "rating": ".rating-box",
             "link": "a.heading"
         },
@@ -61,7 +60,6 @@
             "price": ".price-item.price-item--sale.price-item--last",
             "link": "a"
         },
-        "website": "hometown"
         "website": "hometown"
   }
 }
