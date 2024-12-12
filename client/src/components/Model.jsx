@@ -26,7 +26,7 @@ function ModelPage() {
     try {
       const response = await axios.post('/api/search', requestData);
       console.log(response);
-      setResults(response.data.data.products); // Save the results
+      setResults(response.data.data.products); 
       setItemName('');
       setMake('');
       setCategory('');
@@ -39,7 +39,7 @@ function ModelPage() {
   };
 
   if (results) {
-    return <ModelResultPage results={results} />; // Display ResultPage if results are available
+    return <ModelResultPage results={results} />; 
   }
 
   return (
