@@ -7,26 +7,38 @@ function SpecificationPage() {
   const [details, setDetails] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [results, setResults] = useState(null); // Store results to pass to the results page
+  const [analyticsData, setAnalyticsData] = useState(null);
+  const [results, setResults] = useState(null); // Added this line
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    const requestData = {
-      query: specificationName,
-      details,
-    };
-
     try {
-      const response = await axios.post('/api/specification', requestData);
-      setResults(response.data.data); // Save the results
-      setSpecificationName('');
-      setDetails('');
+      // First get the product data
+      const productResponse = await axios.post('/api/specification', {
+        query: specificationName,
+        details,
+      });
+
+      // Then get the analytics data
+      const analyticsResponse = await axios.post('/api/analyze', {
+        product_name: specificationName,
+        dataset_name: details
+      });
+
+      setAnalyticsData(analyticsResponse.data);
+      
+      // Set the product results
+      setResults({
+        products: productResponse.data.data.products,
+        analytics: analyticsResponse.data
+      });
+
     } catch (err) {
-      console.error('Error sending request:', err);
-      setError('Failed to submit specification details');
+      console.error('Error:', err);
+      setError('Failed to get data');
     } finally {
       setLoading(false);
     }
@@ -45,7 +57,6 @@ function SpecificationPage() {
         className="space-y-6 w-full max-w-[1280px] flex flex-col items-center"
         onSubmit={handleSubmit}
       >
-        {/* Specification Name Input */}
         <div className="flex flex-col w-full sm:w-[473px] mt-6">
           <p className="text-white font-medium mb-2 text-xl sm:text-2xl">Item Name</p>
           <input
@@ -56,8 +67,6 @@ function SpecificationPage() {
             placeholder="Enter item name"
           />
         </div>
-
-        {/* Details Dropdown */}
         <div className="flex flex-col w-full sm:w-[473px]">
           <p className="text-white font-medium mb-2 text-xl sm:text-2xl">Category</p>
           <select
@@ -65,30 +74,27 @@ function SpecificationPage() {
             onChange={(e) => setDetails(e.target.value)}
             className="w-full h-[65px] bg-[#FFAC1C] text-black px-4 rounded-[8.3px] opacity-80"
           >
-            <option value="" disabled>
-              Select a category
-            </option>
+            <option value="" disabled>Select a category</option>
             <option value="furniture">Furniture</option>
-            <option value="networkdevices">Network Devices</option>
+            <option value="network">Network Devices</option>
             <option value="stationary">Stationary</option>
+            <option value="it_hardware">IT Hardware</option>
           </select>
         </div>
 
-        {/* Error Message */}
         {error && (
           <div className="text-red-500 text-sm">
             <p>{error}</p>
           </div>
         )}
 
-        {/* Submit Button */}
         <div className="flex justify-center">
           <button
             type="submit"
             className="w-[199.64px] h-[55.75px] bg-[#FFAC1C] opacity-[0.69] text-black font-medium rounded-[8.3px] text-xl sm:text-2xl"
             disabled={loading}
           >
-            {loading ? 'Submitting...' : 'Submit'}
+            {loading ? 'Analyzing...' : 'Submit'}
           </button>
         </div>
       </form>

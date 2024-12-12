@@ -35,7 +35,7 @@
         "selectors": {
             "product": ".container-1200",
             "title": ".heading",
-            "price": ".price",
+            "price": ".price strong",
             "link": "a.heading"
         },
         "website": "woodenstreet"
@@ -45,7 +45,7 @@
         "selectors": {
             "product": ".plp-product-list__products",
             "title": ".notranslate.plp-price-module__product-name",
-            "price": ".plp-price-module__primary-currency-price",
+            "price": ".plp-price__integer",
             "link": " a.plp-price-link-wrapper.link",
             "rating": ".plp-ratings.plp-ratings--small.plp-ratings--product-card.notranslate"
         },
@@ -54,12 +54,11 @@
   "hometown":{
     "url": "https://www.hometown.in/pages/search?q={query}",
         "selectors": {
-            "product": ".wizzy-search-results-list swiper.feature-collection-home.feature-collection-home_template--22306533769520__featured_collection_QtcxA6.grid.product-grid.contains-card.contains-card--product.contains-card--standard.grid--4-col-desktop.grid--2-col-tablet-down.swiper-initialized.swiper-horizontal",
+            "product": ".wizzy-search-results",
             "title": ".full-unstyled-link",
-            "price": ".price__sale",
+            "price": ".price-item.price-item--sale.price-item--last",
             "link": "a"
         },
-        "website": "royaloak"
+        "website": "hometown"
   }
-  
 }

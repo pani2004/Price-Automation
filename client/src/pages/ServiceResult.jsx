@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 
 function ServiceResult() {
   const location = useLocation();
@@ -14,15 +16,101 @@ function ServiceResult() {
   const consultingData = Array.isArray(data.data) ? data.data : [];
   const cloudServiceData = serviceType === 'cloudservice' ? data.data : [];
   const securityServiceData = serviceType === 'security' ? data.data : [];
-  const vehicleServiceData = serviceType === 'vehicle' ? data.data : [];
 
-  console.log('Consulting Data:', consultingData);
-  console.log('Cloud Service Data:', cloudServiceData);
-  console.log('Vehicle Service Data:', vehicleServiceData);
-
-  if (!data || !serviceType) {
-    return <div>Error: Missing data or service type</div>;
-  }
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.width; // Get the page width for centering
+  
+    let yPosition = 20; // Start position for the title
+  
+    // Set title with centered alignment
+    doc.setFontSize(18);
+    const title = serviceType === 'security'
+        ? 'Security Service Details'
+        : serviceType === 'consultingservices'
+        ? 'Consulting Service Details'
+        : serviceType === 'cloudservice'
+        ? 'Cloud Service Details'
+        : 'Service Details';
+  
+    const titleWidth = doc.getTextWidth(title); // Get the width of the title
+    const titleX = (pageWidth - titleWidth) / 2; // Calculate X position to center the title
+    doc.text(title, titleX, yPosition); // Center the title
+    yPosition += 15; // Add more space after the title
+  
+    // Set table columns
+    const headers =
+      serviceType === 'cloudservice'
+        ? ['Region', 'Cloud Provider', 'Category', 'Service Name', 'Pricing']
+        : ['Service Provider', 'Service Offered', 'Cost'];
+  
+    // Prepare the table data specifically for Cloud Services
+    const tableData =
+      serviceType === 'cloudservice'
+        ? cloudServiceData.flatMap((cloud) =>
+            cloud?.cloud_providers?.flatMap((provider) =>
+              provider?.services?.map((service) => [
+                cloud?.region || 'Not available',
+                provider?.provider || 'Not available',
+                service?.category || 'Not available',
+                service?.service_name || 'Not available',
+                service?.price
+                  ? `$${service.price} ${service.pricing_unit || ''}`
+                  : 'Not available',
+              ])
+            )
+          )
+        : serviceType === 'security'
+        ? securityServiceData.map((service) => [
+            service?.name || 'Not available',
+            service?.service || 'Not available',
+            service?.amount || 'Not available',
+          ])
+        : serviceType === 'consultingservices'
+        ? consultingData.map((service) => [
+            service?.ServiceProvider || 'Not available',
+            service?.ServiceOffered || 'Not available',
+            service?.EstimatedCost || 'Not available',
+          ])
+        : [];
+  
+    // Add table to PDF
+    doc.autoTable({
+      head: [headers],
+      body: tableData,
+      startY: yPosition, // Use updated yPosition after title
+      theme: 'grid',
+      headStyles: {
+        fillColor: [255, 172, 28], // Header background color
+        textColor: [0, 0, 0], // Header text color
+        fontSize: 12,
+        fontStyle: 'bold',
+      },
+      bodyStyles: {
+        textColor: [0, 0, 0], // Body text color
+        fontSize: 10,
+      },
+      margin: { top: 30, left: 10, right: 10 },
+      tableWidth: 'auto',
+      rowHeight: 12, // Adjusted row height to prevent overlap
+      cellPadding: 2, // Increased cell padding to provide more space around the text
+    });
+  
+    // Add the current date and time at the bottom
+    const currentDateTime = new Date().toLocaleString();
+    const dateTimeWidth = doc.getTextWidth(currentDateTime);
+    const dateTimeX = (pageWidth - dateTimeWidth) / 2; // Center the time at the bottom
+    doc.setFontSize(10);
+    doc.text(
+      `PDF generated on: ${currentDateTime}`,
+      dateTimeX,
+      doc.internal.pageSize.height - 10
+    ); // Position near the bottom
+  
+    // Save the PDF
+    doc.save('service-details.pdf');
+  };
+  
 
   const renderServiceDetails = () => {
     switch (serviceType) {
@@ -35,15 +123,11 @@ function ServiceResult() {
                   <th className="px-6 py-4 text-left">Service Provider</th>
                   <th className="px-6 py-4 text-left">Service Offered</th>
                   <th className="px-6 py-4 text-left">Cost</th>
-                  <th className="px-6 py-4 text-left">Link</th>
                 </tr>
               </thead>
               <tbody>
                 {securityServiceData.map((service, index) => (
                   <tr key={index} className="border-t border-gray-700 hover:bg-gray-700">
-                    <td className="px-6 py-4">{service?.name || 'Not available'}</td>
-                    <td className="px-6 py-4">{service?.service || 'Not available'}</td>
-                    <td className="px-6 py-4">{service?.amount || 'Not available'}</td>
                     <td className="px-6 py-4">
                       {service?.siteLink ? (
                         <a
@@ -52,59 +136,73 @@ function ServiceResult() {
                           rel="noopener noreferrer"
                           className="text-blue-400 underline hover:text-blue-600"
                         >
-                          View Link
+                          {service?.name || 'Not available'}
                         </a>
                       ) : (
-                        'Not available'
+                        service?.name || 'Not available'
                       )}
                     </td>
+                    <td className="px-6 py-4">{service?.service || 'Not available'}</td>
+                    <td className="px-6 py-4">{service?.amount || 'Not available'}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         );
-
       case 'cloudservice':
         return (
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Cloud Services</h2>
+            <h2 className="text-2xl text-white text-center font-semibold mb-4">Cloud Services</h2>
             {cloudServiceData.map((cloud, index) => (
               <div key={index} className="mb-6">
-                <h3 className="text-xl font-semibold mb-4">Region: {cloud?.region || 'Not available'}</h3>
+                <h3 className="text-xl text-white text-center font-semibold mb-4">
+                  Region: {cloud?.region || 'Not available'}
+                </h3>
                 {cloud?.cloud_providers?.map((provider, providerIndex) => (
                   <div key={providerIndex} className="mb-4">
-                    <h4 className="font-medium text-lg">{provider?.provider || 'Not available'}</h4>
+                    <h4 className="font-medium text-lg">
+                      {provider?.provider ? (
+                        <a
+                          href={provider?.link || '#'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-400 underline hover:text-blue-600"
+                        >
+                          {provider?.provider}
+                        </a>
+                      ) : (
+                        'Not available'
+                      )}
+                    </h4>
                     <table className="min-w-full table-auto border-collapse bg-gray-800 text-white rounded-lg shadow-lg">
                       <thead>
                         <tr>
                           <th className="px-6 py-4 text-left">Category</th>
                           <th className="px-6 py-4 text-left">Service Name</th>
                           <th className="px-6 py-4 text-left">Pricing</th>
-                          <th className="px-6 py-4 text-left">Link</th>
                         </tr>
                       </thead>
                       <tbody>
                         {provider?.services?.map((service, serviceIndex) => (
                           <tr key={serviceIndex} className="border-t border-gray-700 hover:bg-gray-700">
-                            <td className="px-6 py-4">{service?.category || 'Not available'}</td>
-                            <td className="px-6 py-4">{service?.service_name || 'Not available'}</td>
                             <td className="px-6 py-4">
-                              {service?.price ? `$${service?.price} ${service?.pricing_unit}` : 'Not available'}
-                            </td>
-                            <td className="px-6 py-4">
-                              {service?.link ? (
+                              {service?.category ? (
                                 <a
-                                  href={service?.link}
+                                  href={service?.link || '#'}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-blue-400 underline hover:text-blue-600"
                                 >
-                                  View Link
+                                  {service?.category || 'Not available'}
                                 </a>
                               ) : (
                                 'Not available'
                               )}
+                            </td>
+                            <td className="px-6 py-4">{service?.service_name || 'Not available'}</td>
+                            <td className="px-6 py-4">
+                              {service?.price ? `$${service?.price} ${service?.pricing_unit}` : 'Not available'}
                             </td>
                           </tr>
                         ))}
@@ -137,60 +235,19 @@ function ServiceResult() {
                     <td className="px-6 py-4">{service?.ServiceOffered || 'Not available'}</td>
                     <td className="px-6 py-4">{service?.EstimatedCost || 'Not available'}</td>
                     <td className="px-6 py-4">
-                      {service?.Website ? (
+                      {service?.Link ? (
                         <a
-                          href={service?.Website}
+                          href={service?.Link}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-400 underline hover:text-blue-600"
                         >
-                          View Link
+                          {service?.Link || 'Not available'}
                         </a>
                       ) : (
                         'Not available'
                       )}
                     </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        );
-
-      case 'vehicle':
-        return (
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Vehicle Service Details</h2>
-            <table className="min-w-full table-auto border-collapse bg-gray-800 text-white rounded-lg shadow-lg">
-              <thead>
-                <tr>
-                  <th className="px-6 py-4 text-left">Model</th>
-                  <th className="px-6 py-4 text-left">Price</th>
-                  <th className="px-6 py-4 text-left">Website Link</th>
-                  <th className="px-6 py-4 text-left">Available Variants</th>
-                </tr>
-              </thead>
-              <tbody>
-                {vehicleServiceData.map((vehicle, index) => (
-                  <tr key={index} className="border-t border-gray-700 hover:bg-gray-700">
-                    <td className="px-6 py-4">{vehicle?.Model || 'Not available'}</td>
-                    <td className="px-6 py-4">{vehicle?.Price ? `${vehicle?.Price}` : 'Not available'}</td>
-                    <td className="px-6 py-4">
-                      {vehicle?.WebsiteLink ? (
-                        <a
-                          href={vehicle?.
-                            WebsiteLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-400 underline hover:text-blue-600"
-                        >
-                          View Link
-                        </a>
-                      ) : (
-                        'Not available'
-                      )}
-                    </td>
-                    <td className="px-6 py-4">{vehicle?.AvailableVariants || 'Not available'}</td>
                   </tr>
                 ))}
               </tbody>
@@ -199,48 +256,25 @@ function ServiceResult() {
         );
 
       default:
-        return (
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Service Details</h2>
-            <p><strong>Description:</strong> {data?.Description || 'Not available'}</p>
-            <p><strong>Amount:</strong> ${data?.Amount || 'Not available'}</p>
-          </div>
-        );
+        return <div>No data available for this service type.</div>;
     }
   };
 
   return (
-    <div
-      className="flex flex-col items-center justify-center"
-      style={{
-        width: '100%',
-        height: '100vh',
-        background:
-          'linear-gradient(104.67deg, #1E1E2F 15.15%, #121212 38.15%, #121212 68.52%, #2B2B4F 96.15%)',
-        color: '#fff',
-        padding: '20px',
-        overflowX: 'hidden',
-        overflowY: 'auto',
-      }}
-    >
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        {serviceType === 'security'
-          ? 'Security Service Details'
-          : serviceType === 'consultingservices'
-          ? 'Consulting Service Details'
-          : serviceType === 'cloudservice'
-          ? 'Cloud Service Details'
-          : serviceType === 'vehicle'
-          ? 'Vehicle Service Details'
-          : 'Service Details'}
-      </h1>
-      <div className="space-y-6 w-full max-w-7xl">
-        {renderServiceDetails()}
-      </div>
+    <div className="p-6">
+      {renderServiceDetails()}
+      <button
+        onClick={generatePDF}
+        className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+      >
+        Generate PDF
+      </button>
     </div>
   );
 }
 
 export default ServiceResult;
+
+
 
 

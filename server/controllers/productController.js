@@ -24,7 +24,10 @@ export const scrapeController1 = asyncHandler(async (req, res, next) => {
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData) {
       console.log('Cache hit');
-      return res.status(200).json(new ApiResponse(200, JSON.parse(cachedData), 'Data retrieved from cache'));
+      return res.status(200).json(new ApiResponse(200, {
+        products: JSON.parse(cachedData),
+        timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }).replace(",", ""),
+      }, 'Data retrieved from cache'));
     }
     console.log('Cache miss');
     const results = await scrape(query, normalizedDetails);
@@ -39,7 +42,7 @@ export const scrapeController1 = asyncHandler(async (req, res, next) => {
         price: product.price || 'No price provided',
         link: product.link || 'No link provided',
         site: result.website,
-        timestamp: new Date(),
+        timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }).replace(",", ""),
       }))
     );
 
@@ -55,7 +58,10 @@ export const scrapeController1 = asyncHandler(async (req, res, next) => {
       );
     }
     await redisClient.set(cacheKey, JSON.stringify(productsToSave), { EX: 3600 });
-    return res.status(200).json(new ApiResponse(200, productsToSave, 'Scraping and saving successful'));
+    return res.status(200).json(new ApiResponse(200, {
+      products: productsToSave,
+      timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }).replace(",", ""),
+    }, 'Scraping and saving successful'));
   } catch (error) {
     console.error('Error during scraping:', error);
     return next(new ApiError(500, 'Failed to scrape and save data'));

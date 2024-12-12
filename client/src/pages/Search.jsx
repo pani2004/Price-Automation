@@ -3,58 +3,28 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 function SearchPage() {
-  const [displayedText, setDisplayedText] = useState('');
-  const [isTypingFinished, setIsTypingFinished] = useState(false);
-  const fullText = 'Find Exactly What You Need';
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      setDisplayedText((prev) => fullText.slice(0, index + 1));
-      index++;
-      if (index === fullText.length) {
-        clearInterval(interval);
-        setIsTypingFinished(true);
-      }
-    }, 50); // Typing speed in milliseconds
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div
-      className="w-full flex flex-col min-h-screen justify-between items-center px-4 sm:px-6 lg:px-8"
-      style={{
-        margin: '0 auto',
-        userSelect: 'none', // Prevent text selection
-      }}
-    >
-      <h1
-        className="font-sans font-bold text-white text-center mt-20 text-2xl sm:text-7xl"
+    <div className="w-full flex flex-col min-h-screen justify-between items-center px-4 sm:px-6 lg:px-8 font-sf-display">
+      <div
+        className=" flex justify-center items-center"
         style={{
-          fontFamily: 'Rokkitt, sans-serif',
+          width: '1600px',
+          height: '156px',
+          backgroundColor: '#004989',
         }}
       >
-        {isTypingFinished ? (
-          <>
-            Find{' '}
-            <span style={{ color: 'orange' }}>Exactly</span> What You Need
-          </>
-        ) : (
-          displayedText
-        )}
-      </h1>
+        <h1 className="text-white font-bold text-center text-2xl sm:text-4xl">
+          Find Exactly What You Need
+        </h1>
+      </div>
       <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-10 w-full">
         <Link
           to="/model"
           className="flex flex-col sm:flex-row items-center px-4 w-full sm:w-[514px] hover:scale-110 transition-transform duration-300"
           style={{
             width: '514px',
-            height: '91px',
-            backgroundColor: 'rgba(255, 140, 0, 0.16)', 
-            borderRadius: '8px',
             height: '100px',
-            backgroundColor: '#FFAC1C',
+            backgroundColor: 'rgba(0, 73, 137, 0.16)', // Corrected background color
             borderRadius: '20px',
           }}
         >
@@ -77,7 +47,7 @@ function SearchPage() {
           className="flex flex-col sm:flex-row items-center px-4 w-full sm:w-[514px] hover:scale-110 transition-transform duration-300"
           style={{
             height: '100px',
-            backgroundColor: '#FFAC1C',
+            backgroundColor: 'rgba(0, 73, 137, 0.16)',
             borderRadius: '20px',
           }}
         >
@@ -100,7 +70,7 @@ function SearchPage() {
           className="flex flex-col sm:flex-row items-center px-4 w-full sm:w-[514px] hover:scale-110 transition-transform duration-300"
           style={{
             height: '100px',
-            backgroundColor: '#FFAC1C',
+            backgroundColor: 'rgba(0, 73, 137, 0.16)',
             borderRadius: '20px',
           }}
         >

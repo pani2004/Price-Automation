@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js";
 import searchRoutes from "./routes/searchRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import vehicleRoutes from "./routes/vehicleRoutes.js";
+import analyticsRoutes from "./routes/analyticsRoutes.js";
 const app = express();
 dotenv.config();
 app.use(express.json());
@@ -24,3 +25,4 @@ app.use('/api',authRoutes)
 app.use('/api',searchRoutes)
 app.use('/api',serviceRoutes)
 app.use('/api',vehicleRoutes)
+app.use('/api',analyticsRoutes)

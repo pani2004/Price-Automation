@@ -16,14 +16,6 @@
   }
 
 
-body{
-    background:linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), 
-              linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(255, 255, 255) 33%, rgb(105, 105, 204) 66%, rgb(19, 19, 255) 100%), 
-              linear-gradient(90deg, rgb(30, 30, 47) 12%, rgb(18, 18, 18) 37%, rgb(18, 18, 18) 85%, rgb(43, 43, 79) 100%);
-    background-blend-mode: darken;
-    background-size: 100% 100%;
 
-    user-select: none;
-}
 
 

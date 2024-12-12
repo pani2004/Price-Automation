@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import ModelResultPage from "../pages/ModelResultPage" // Import the ResultPage component
+import ModelResultPage from "../pages/ModelResultPage"; // Import the ResultPage component
+import Navbar from '../components/Navbar'; // Import the Navbar component
 
 function ModelPage() {
   const [itemName, setItemName] = useState('');
@@ -24,7 +25,8 @@ function ModelPage() {
 
     try {
       const response = await axios.post('/api/search', requestData);
-      setResults(response.data.data); // Save the results
+      console.log(response);
+      setResults(response.data.data.products); // Save the results
       setItemName('');
       setMake('');
       setCategory('');
@@ -41,77 +43,89 @@ function ModelPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="font-sans font-bold text-white text-center text-5xl mb-10">
-        Enter Product Details
-      </h1>
+    <>
+      <div
+        className="w-full flex justify-center items-center"
+        style={{
+          width: '1280px',
+          height: '156px',
+          backgroundColor: '#004989',
+        }}
+      >
+        <Navbar />
+      </div>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <h1 className="font-sans font-bold text-white text-center text-5xl mb-10">
+          Enter Product Details
+        </h1>
 
-      <form className="space-y-6" onSubmit={handleSubmit}>
-        <div className="grid grid-cols-2 gap-6 w-[960px]">
-          <div className="flex flex-col">
-            <label className="text-white font-medium mb-2">Item Name</label>
-            <input
-              type="text"
-              value={itemName}
-              onChange={(e) => setItemName(e.target.value)}
-              className="w-full h-[74px] bg-[#FF8C00] opacity-[0.8] text-black px-4 rounded-[8.3px]"
-              placeholder="Enter Item Name"
-            />
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <div className="grid grid-cols-2 gap-6 w-[960px]">
+            <div className="flex flex-col">
+              <label className="text-white font-medium mb-2">Item Name</label>
+              <input
+                type="text"
+                value={itemName}
+                onChange={(e) => setItemName(e.target.value)}
+                className="w-full h-[74px] bg-[#FF8C00] opacity-[0.8] text-black px-4 rounded-[8.3px]"
+                placeholder="Enter Item Name"
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label className="text-white font-medium mb-2">Make</label>
+              <input
+                type="text"
+                value={make}
+                onChange={(e) => setMake(e.target.value)}
+                className="w-full h-[74px] bg-[#FF8C00] opacity-[0.8] text-black px-4 rounded-[8.3px]"
+                placeholder="Enter Make"
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label className="text-white font-medium mb-2">Category</label>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full h-[74px] bg-[#FF8C00] opacity-[0.8] text-black px-4 rounded-[8.3px]"
+              >
+                <option value="" disabled>
+                  Select Category
+                </option>
+                <option value="it_hardware">It Hardware</option>
+              </select>
+            </div>
+
+            <div className="flex flex-col">
+              <label className="text-white font-medium mb-2">Model</label>
+              <input
+                type="text"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+                className="w-full h-[74px] bg-[#FF8C00] opacity-[0.8] text-black px-4 rounded-[8.3px]"
+                placeholder="Enter Model"
+              />
+            </div>
           </div>
 
-          <div className="flex flex-col">
-            <label className="text-white font-medium mb-2">Make</label>
-            <input
-              type="text"
-              value={make}
-              onChange={(e) => setMake(e.target.value)}
-              className="w-full h-[74px] bg-[#FF8C00] opacity-[0.8] text-black px-4 rounded-[8.3px]"
-              placeholder="Enter Make"
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="text-white font-medium mb-2">Category</label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="w-full h-[74px] bg-[#FF8C00] opacity-[0.8] text-black px-4 rounded-[8.3px]"
+          <div className="flex justify-center mt-6">
+            <button
+              type="submit"
+              className="w-[199.64px] h-[55.75px] bg-[#FF8C00] text-black font-medium rounded-[8.3px] text-2xl"
             >
-              <option value="" disabled>
-                Select Category
-              </option>
-              <option value="it_hardware">It Hardware</option>
-            </select>
+              Submit
+            </button>
           </div>
 
-          <div className="flex flex-col">
-            <label className="text-white font-medium mb-2">Model</label>
-            <input
-              type="text"
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
-              className="w-full h-[74px] bg-[#FF8C00] opacity-[0.8] text-black px-4 rounded-[8.3px]"
-              placeholder="Enter Model"
-            />
-          </div>
-        </div>
+          {message && (
+            <p className="text-center text-black font-medium mt-4">{message}</p>
+          )}
+        </form>
 
-        <div className="flex justify-center mt-6">
-          <button
-            type="submit"
-            className="w-[199.64px] h-[55.75px] bg-[#FF8C00] text-black font-medium rounded-[8.3px] text-2xl"
-          >
-            Submit
-          </button>
-        </div>
-
-        {message && (
-          <p className="text-center text-black font-medium mt-4">{message}</p>
-        )}
-      </form>
-
-      {/* Footer component (if any) */}
-    </div>
+        {/* Footer component (if any) */}
+      </div>
+    </>
   );
 }
 

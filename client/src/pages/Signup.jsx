@@ -44,18 +44,10 @@ function Signup() {
   };
 
   return (
-    <div
-      className="overflow-hidden"
-      style={{
-        fontFamily: 'SF Pro Display, sans-serif',
-        background: `linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), 
-                     linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(255, 255, 255) 33%, rgb(105, 105, 204) 66%, rgb(19, 19, 255) 100%), 
-                     linear-gradient(90deg, rgb(30, 30, 47) 12%, rgb(18, 18, 18) 37%, rgb(18, 18, 18) 85%, rgb(43, 43, 79) 100%)`,
-        backgroundBlendMode: 'darken',
-        backgroundSize: '100% 100%',
-      }}
-    >
-      <Navbar />
+    <div>
+      <div className="bg-[#004989] h-[150px]"> 
+        <Navbar />
+      </div>
       <div
         className="p-3 mx-auto flex items-center min-h-screen justify-center overflow-hidden"
         style={{
@@ -130,9 +122,9 @@ function Signup() {
           }}
         >
           <img
-            src="/3.png"
+            src="/2.png"
             alt="Sign Up Illustration"
-            className="w-[570px] h-[540px] object-cover rounded-md"
+            className="w-[527px] h-[336.96px] object-cover rounded-md"
           />
         </div>
       </div>

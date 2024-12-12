@@ -2,33 +2,15 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,jsx}", // Removed TypeScript-specific extensions
+    "./src/**/*.{js,jsx}", // Adjusted to match JavaScript and JSX files only
   ],
   theme: {
     extend: {
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-        sans: ['Rokkitt', 'sans-serif'],
-        anton: ['Anton SC', 'sans-serif'],
-      },
-      fontSize: {
-        'custom': '19.27px', // Custom font size
-      },
-      colors: {
-        'custom-orange': '#FF8C00', // Custom orange color
-        'custom-bg': '#fffcfa',     // Custom background color
-      },
-      width: {
-        'custom-navbar': '769px',   // Custom width for navbar
-      },
-      height: {
-        'custom-navbar': '71.16px', // Custom height for navbar
-      },
-      padding: {
-        'custom-x': '32.11px',      // Custom horizontal padding
-        'custom-y': '24.08px',      // Custom vertical padding
+        'sf-display': ['"SF Pro Display"', 'sans-serif'], // SF Pro Display font
       },
     },
   },
   plugins: [],
 };
+

@@ -19,10 +19,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  timestamp: {
-    type: Date,
-    default: Date.now,
-  },
+  timestamp: { type: String, required: true }
 });
 
 const Product = mongoose.model('Product', productSchema);

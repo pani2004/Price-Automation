@@ -43,40 +43,31 @@ function Signin() {
   };
 
   return (
-    <div
-      className="min-h-screen flex flex-col overflow-hidden relative"
-      style={{
-        background: `linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), 
-                     linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(255, 255, 255) 33%, rgb(105, 105, 204) 66%, rgb(19, 19, 255) 100%), 
-                     linear-gradient(90deg, rgb(30, 30, 47) 12%, rgb(18, 18, 18) 37%, rgb(18, 18, 18) 85%, rgb(43, 43, 79) 100%)`,
-        backgroundBlendMode: 'darken',
-        backgroundSize: '100% 100%',
-      }}
-    >
-      <Navbar />
-      <div className="flex flex-1">
+    <div className="w-full min-h-screen bg-white flex flex-col overflow-x-hidden overflow-y-hidden font-sf-display">
+      {/* Navbar Section */}
+      <div className="bg-[#004989] h-[150px]"> 
+        <Navbar />
+      </div>
+      <div className="flex flex-1 bg-[#DCDCDC]">
         <div className="flex justify-start items-center w-1/2 pl-16">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col items-center bg-transparent p-6"
             style={{ width: '572.98px' }}
           >
-            <div className="flex flex-col gap-4 mb-6" style={{ width: '572.98px' }}>
+            <div className="flex flex-col gap-10 mb-6" style={{ width: '572.98px' }}>
               <div className="relative">
                 <input
                   type="text"
                   id="email"
-                  placeholder="email"
-                  className="rounded-lg p-4 focus:outline-none "
+                  placeholder="Email"
+                  className="p-4 focus:outline-none focus:border-b-2 focus:border-blue-500 placeholder-gray-500 bg-transparent"
                   style={{
-                    width: '572.98px',
-                    height: '88.05px',
+                    width: '100%',
+                    height: '40px',
+                    borderBottom: '1px solid gray',
                   }}
                   onChange={handleChange}
-                />
-                <div
-                  className="absolute bottom-0 left-0 w-full border-b border-gray-300"
-                  style={{ width: '572.98px' }}
                 />
               </div>
               <div className="relative">
@@ -84,26 +75,23 @@ function Signin() {
                   type="password"
                   id="password"
                   placeholder="Password"
-                  className="rounded-lg p-4 focus:outline-none "
+                  className="p-4 focus:outline-none focus:border-b-2 focus:border-blue-500 placeholder-gray-500 bg-transparent"
                   style={{
-                    width: '572.98px',
-                    height: '88.05px',
+                    width: '100%',
+                    height: '40px',
+                    borderBottom: '1px solid gray',
                   }}
                   onChange={handleChange}
-                />
-                <div
-                  className="absolute bottom-0 left-0 w-full border-b border-gray-300"
-                  style={{ width: '572.98px' }}
                 />
               </div>
             </div>
             <button
               type="submit"
-              className="rounded-full text-black font-semibold"
+              className="rounded-full text-white font-semibold"
               style={{
                 width: '150px',
                 height: '50px',
-                backgroundColor: '#FF8C00',
+                backgroundColor: '#004989',
                 borderRadius: '30px',
               }}
               disabled={loading}
@@ -111,7 +99,7 @@ function Signin() {
               {loading ? 'Signing In...' : 'Login'}
             </button>
             {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
-            <div className="flex gap-2 mt-4 text-white">
+            <div className="flex text-xl gap-2 mt-4 text-black">
               <p>Don't have an account?</p>
               <Link to="/signup">
                 <span className="text-blue-400">Sign Up</span>
@@ -125,9 +113,9 @@ function Signin() {
           style={{ minHeightHeight: '800px' }}
         >
           <img
-            src="/3.png"
+            src="/2.png"
             alt="Placeholder"
-            className="w-full h-full object-cover"
+            className="w-[527px] h-[336.96px]  mt-24  left-40"
           />
         </div>
       </div>
@@ -137,3 +125,4 @@ function Signin() {
 }
 
 export default Signin;
+
