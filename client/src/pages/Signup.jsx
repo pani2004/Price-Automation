@@ -45,16 +45,13 @@ function Signup() {
 
   return (
     <div>
-      <div
-        className="bg-[#004989] h-[150px] flex items-center justify-center fixed top-0 left-0 w-full z-10"
-      >
+      <div className="bg-[#004989] h-[150px]"> 
         <Navbar />
       </div>
       <div
         className="p-3 mx-auto flex items-center min-h-screen justify-center overflow-hidden"
         style={{
           maxWidth: '1280px',
-          marginTop: '150px', // To ensure content is not hidden under the banner
         }}
       >
         <div className="flex-1">
@@ -100,6 +97,7 @@ function Signup() {
                 width: '150px',
                 height: '50px',
                 backgroundColor: '#004989',
+                color: 'black',
                 marginTop: '20px',
               }}
               type="submit"

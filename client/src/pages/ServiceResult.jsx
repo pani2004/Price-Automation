@@ -92,7 +92,7 @@ function ServiceResult() {
       },
       margin: { top: 30, left: 10, right: 10 },
       tableWidth: 'auto',
-      rowHeight: 12, // Adjusted row height to prevent overlap
+      rowHeight: 10, // Adjusted row height to prevent overlap
       cellPadding: 2, // Increased cell padding to provide more space around the text
     });
   
@@ -127,7 +127,7 @@ function ServiceResult() {
               </thead>
               <tbody>
                 {securityServiceData.map((service, index) => (
-                  <tr key={index} className="border-t border-gray-400 hover:bg-blue-300">
+                  <tr key={index} className="border-t--------">
                     <td className="px-6 py-4">
                       {service?.siteLink ? (
                         <a

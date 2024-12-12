@@ -17,7 +17,7 @@
             "title": ".woocommerce-LoopProduct-link.woocommerce-loop-product__link",
             "link": "a.woocommerce-LoopProduct-link.woocommerce-loop-product__link",
             "price": ".woocommerce-Price-currencySymbol",
-            "rating": ".star-rating.star-rating--inline"
+            "rating": ".rating"
         },
         "website": "e2zstore"
     },
@@ -38,7 +38,7 @@
       "title": ".name a",
       "link": "a",
       "price": ".price-new",
-      "rating": ".rating-stars"
+      "rating": ".rating"
 
     },
     "website": "vedantcomputers"
@@ -91,7 +91,7 @@
       "product": ".product-grid-container",
       "title": ".full-unstyled-link",
       "price": ".price-item.price-item--regular",
-      "rating": ".alireviews-review-star-rating",
+      "rating": ".alr-wh-review-star-rating-number",
       "link": "a"
     },
     "website": "tpstech"

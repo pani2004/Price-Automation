@@ -5,7 +5,7 @@
         "product": ".clip-product-listing-container.container.ng-star-inserted",
         "title": ".product-name.color-tertiary.text-md.font-medium.ng-star-inserted",
         "price": ".product-offer-price.font-bold.text-xl.ng-star-inserted",
-        "rating": ".product-card-rating.ng-star-inserted",
+        "rating": ".text-sm",
         "link": "a"
     },
     "website": "pepperfry"

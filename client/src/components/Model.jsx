@@ -54,7 +54,7 @@ function ModelPage() {
       >
         <Navbar />
       </div>
-      <div className="flex flex-col bg-[#DCDCDC] items-center justify-center min-h-screen">
+      <div className="flex flex-col bg-[#DCDCDC] items-center justify-center min-h-screen overflow-x-hidden">
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-6 w-[960px]">
@@ -109,7 +109,7 @@ function ModelPage() {
           <div className="flex justify-center mt-6">
             <button
               type="submit"
-              className="w-[199.64px] h-[55.75px] bg-[#004989B0] text-white font-medium rounded-[8.3px] text-2xl"
+              className="w-[199.64px] h-[55.75px] bg-[#004989ce] text-white font-medium rounded-[8.3px] text-2xl"
             >
               Submit
             </button>
